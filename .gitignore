@@ -1,0 +1,17 @@
+*
+!.gitignore
+
+!beamerthemeD3S.sty
+
+!CUNI.png
+!D3S.png
+!D3SWM.png
+!Head.png
+!Item.png
+!SubItem.png
+!SubSubItem.png
+
+!Makefile
+
+!slides.latex
+!slides.mp

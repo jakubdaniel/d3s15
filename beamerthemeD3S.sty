@@ -1,0 +1,340 @@
+\ProvidesPackage{beamerthemeD3S}[2013/09/24]
+
+\mode<all>
+
+\DeclareOptionBeamer{footlineauthor}{\expandafter\def\csname beamer@D3S@footlineauthor \endcsname{1}}
+\DeclareOptionBeamer{comments}{\expandafter\def\csname beamer@D3S@comments \endcsname{1}}
+\DeclareOptionBeamer{event}[true]{\expandafter\def\csname beamer@D3S@event \endcsname{#1}}
+\DeclareOptionBeamer{date}[true]{\expandafter\def\csname beamer@D3S@date \endcsname{#1}}
+\ExecuteOptionsBeamer{event=D3S Seminar}
+\ExecuteOptionsBeamer{date=\today}
+\ProcessOptionsBeamer
+
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{pgfpages}
+
+\expandafter\if\csname beamer@D3S@comments \endcsname1
+  \setbeameroption{show notes on second screen=right}
+\fi
+
+\beamertemplatenavigationsymbolsempty
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{courier}
+\usepackage[T1]{fontenc}
+\usepackage{shadowtext}
+\usepackage{forloop}
+\usepackage[trim]{tokenizer}
+\usepackage[iso,yyyymmdd]{datetime}
+\usepackage{listings}
+
+\definecolor{d3s_comment}{rgb}{0.12, 0.38, 0.18}
+\definecolor{d3s_keyword}{rgb}{0.37, 0.08, 0.25}
+\definecolor{d3s_string}{rgb}{0.06, 0.10, 0.98}
+
+\definecolor{blue}{RGB}{0, 176, 240}
+\definecolor{darkblue}{RGB}{0, 112, 192}
+
+\definecolor{red}{RGB}{240, 0, 44}
+\definecolor{darkred}{RGB}{192, 0, 28}
+
+\definecolor{green}{RGB}{32, 192, 0}
+\definecolor{darkgreen}{RGB}{16, 128, 0}
+
+\definecolor{gray}{RGB}{192, 192, 192}
+\definecolor{darkgray}{RGB}{86, 86, 86}
+
+\definecolor{orange}{RGB}{240, 100, 44}
+\definecolor{darkorange}{RGB}{192, 60, 28}
+
+\def\pro{\item[%
+  \begin{pgfpicture}{0cm}{0cm}{0.25cm}{0.25cm}%
+    \begin{pgfscope}%
+      \color{darkgreen}%
+      \pgfsetlinewidth{2}%
+      \pgfmoveto{\pgfxy(   0, 0.125)}%
+      \pgflineto{\pgfxy(0.25, 0.125)}%
+      \pgfstroke%
+      \pgfmoveto{\pgfxy(0.125,    0)}%
+      \pgflineto{\pgfxy(0.125, 0.25)}%
+      \pgfstroke%
+    \end{pgfscope}%
+  \end{pgfpicture}%
+]}
+\def\con{\item[%
+  \begin{pgfpicture}{0cm}{0cm}{0.25cm}{0.25cm}%
+    \begin{pgfscope}%
+      \color{darkred}%
+      \pgfsetlinewidth{2}%
+      \pgfmoveto{\pgfxy(   0, 0.125)}%
+      \pgflineto{\pgfxy(0.25, 0.125)}%
+      \pgfstroke%
+    \end{pgfscope}%
+  \end{pgfpicture}%
+]}
+
+\let\oldtitle\title
+\def\title#1{\oldtitle{#1}\gdef\insertfancytitle{#1}\gdef\insertrunningtitle{#1}}
+\def\fancytitle#1{\gdef\insertfancytitle{#1}}
+\def\runningtitle#1{\gdef\insertrunningtitle{#1}}
+
+\usetikzlibrary{positioning,calc}
+\tikzset{%
+  onslide/.code args={<#1>#2}{%
+    \only<#1>{\pgfkeysalso{#2}} % \pgfkeysalso doesn't change the path
+  }%
+}
+
+\newenvironment<>{btHighlight}[1][]{%
+  \begin{onlyenv}#2\begingroup\tikzset{bt@Highlight@par/.style={#1}}\begin{lrbox}{\@tempboxa}%
+}{%
+  \end{lrbox}\bt@HL@box[bt@Highlight@par]{\@tempboxa}\endgroup\end{onlyenv}%
+}
+\newcommand<>\btHL[1][]{%
+  \only#2{\begin{btHighlight}[#1]\bgroup\aftergroup\bt@HL@endenv}%
+}
+\def\bt@HL@endenv{%
+  \end{btHighlight}%
+    \egroup
+}
+\newcommand{\bt@HL@box}[2][]{%
+  \tikz[#1]{%
+    \pgfpathrectangle{\pgfpoint{1pt}{0pt}}{\pgfpoint{\wd #2}{\ht #2}}%
+    \pgfusepath{use as bounding box}%
+    \node[anchor=base west,fill=blue!30!white,outer sep=0pt,inner xsep=1pt, inner ysep=1pt, rounded corners=3pt, minimum height=\ht\strutbox+1pt,#1]{\raisebox{1pt}{\strut}\strut\usebox{#2}};
+  }%
+}
+
+\lstset{
+  tabsize=2,%
+  keepspaces,%
+  extendedchars=true,%
+  basicstyle=\footnotesize\tt,%
+  commentstyle=\color{d3s_comment},%
+  keywordstyle=\color{d3s_keyword}\bfseries,%
+  stringstyle=\color{d3s_string}\itshape,%
+  aboveskip=5pt,%
+  upquote=true,%
+  columns=fixed,%
+  showstringspaces=false,%
+  extendedchars=true,%
+  breaklines=true,%
+  showtabs=false,%
+  showspaces=false,%
+  showstringspaces=false,%
+  escapechar=`,%
+}
+
+\lstdefinelanguage{Java}{
+  keywords=[2]{assert},%
+  keywordstyle=\color{darkblue}\bfseries,%
+  keywordstyle=[2]{\color{darkred}\bfseries},%
+  morekeywords={abstract,boolean,break,byte,case,catch,char,class,const,continue,default,do,double,else,enum,extends,final,finally,float,for,goto,if,implements,import,instanceof,int,interface,long,native,new,package,private,protected,public,return,short,static,strictfp,super,switch,synchronized,this,throw,throws,transient,try,void,volatile,while},%
+  moredelim={**[is][\btHL]{@}{@}},%
+  moredelim={**[is][\btHL<1>]{@1}{@}},%
+  moredelim={**[is][\btHL<2>]{@2}{@}},%
+  moredelim={**[is][\btHL<3>]{@3}{@}},%
+  moredelim={**[is][\btHL<4>]{@4}{@}},%
+  moredelim={**[is][\btHL<5>]{@5}{@}},%
+  moredelim={**[is][\btHL<6>]{@6}{@}},%
+  moredelim={**[is][\btHL<7>]{@7}{@}},%
+  moredelim={**[is][\btHL<8>]{@8}{@}},%
+  moredelim={**[is][\btHL<9>]{@9}{@}},%
+  moredelim={**[is][\btHL<10>]{@10}{@}},%
+  escapeinside={(*}{*)},%
+}
+
+\lstdefinelanguage{MyC}{
+  keywords=[2]{assert},%
+  keywordstyle=\color{darkblue}\bfseries,%
+  keywordstyle=[2]{\color{darkred}\bfseries},%
+  morekeywords={boolean,break,byte,case,char,const,continue,default,do,double,else,enum,float,for,goto,if,int,long,return,short,static,switch,unsigned,void,while},%
+  moredelim={**[is][\btHL]{@}{@}},%
+  moredelim={**[is][\btHL<1>]{@1}{@}},%
+  moredelim={**[is][\btHL<2>]{@2}{@}},%
+  moredelim={**[is][\btHL<3>]{@3}{@}},%
+  moredelim={**[is][\btHL<4>]{@4}{@}},%
+  moredelim={**[is][\btHL<5>]{@5}{@}},%
+  moredelim={**[is][\btHL<6>]{@6}{@}},%
+  moredelim={**[is][\btHL<7>]{@7}{@}},%
+  moredelim={**[is][\btHL<8>]{@8}{@}},%
+  moredelim={**[is][\btHL<9>]{@9}{@}},%
+  moredelim={**[is][\btHL<10>]{@10}{@}},%
+  escapeinside={(*}{*)}%
+}
+
+\newcounter{rrCount}
+\newcommand{\replace}[3]{%
+  \GetTokens{rrFirst}{rrRest}{#3#1}%
+  \rrFirst%
+  \forloop{rrCount}{0}{\value{rrCount} < 100}{%
+    \ifthenelse{\equal{\rrRest}{}}{%
+      \setcounter{rrCount}{101}%
+    }{%
+      \GetTokens{rrFirst}{rrRest}{\rrRest}%
+      #2\rrFirst%
+    }%
+  }%
+}
+
+\renewcommand{\insertslideintonotes}[1]{%
+  {%
+    \begin{pgfpicture}{0cm}{0cm}{#1\paperwidth}{#1\paperheight}%
+      \begin{pgflowlevelscope}{\pgftransformscale{#1}}%
+        \color{black}%
+        {\pgftransformshift{\pgfpoint{\beamer@origlmargin}{\footheight}}\pgftext[left,bottom]{\copy\beamer@frameboxcopy}}%
+      \end{pgflowlevelscope}%
+    \end{pgfpicture}%
+  }%
+}
+
+\def\beamer@setupnote{%
+  \gdef\beamer@notesactions{%
+    \beamer@outsideframenote{%
+      \beamer@atbeginnote%
+      \beamer@notes%
+      \vbox{%
+        \advance \linewidth by -3em%
+        \hbox to \linewidth{\hfill  \insertslideintonotes{0.5} \hfill}%
+        \ifx\beamer@noteitems\@empty%
+        \else%
+          \setbeamertemplate{itemize item}{\includegraphics[width=1ex,keepaspectratio]{Item}}%
+          \setbeamertemplate{itemize subitem}{\includegraphics[width=1ex,keepaspectratio]{SubItem}}%
+          \setbeamertemplate{itemize subsubitem}{\includegraphics[width=1ex,keepaspectratio]{SubSubItem}}%
+          \begin{itemize}%
+            \footnotesize%
+            \beamer@noteitems%
+          \end{itemize}%
+        \fi%
+      }%
+      \beamer@atendnote%
+    }%
+    \gdef\beamer@notesactions{}%
+  }%
+}%
+
+\setbeamercolor{note page}{fg=gray}
+\setbeamercolor{frametitle}{fg=black}
+\setbeamercolor{block title}{fg=black}
+\setbeamercolor{title}{fg=black}
+\setbeamercolor{titlelike}{fg=black}
+\setbeamercolor{enumerate item}{fg=black}
+\setbeamercolor{enumerate subitem}{fg=black}
+\setbeamercolor{enumerate subsubitem}{fg=black}
+\setbeamercolor{bibliography item}{fg=black}
+\setbeamercolor{bibliography entry author}{fg=black}
+\setbeamercolor{bibliography entry title}{fg=black}
+\setbeamercolor{bibliography entry location}{fg=black}
+\setbeamercolor{bibliography entry note}{fg=black}
+
+\setbeamertemplate{note page}{%
+  \insertnote%
+}
+
+\setbeamertemplate{note page item}{\includegraphics[width=1ex,keepaspectratio]{Item}}
+\setbeamertemplate{itemize item}{\includegraphics[width=1ex,keepaspectratio]{Item}}
+\setbeamertemplate{itemize subitem}{\includegraphics[width=1ex,keepaspectratio]{SubItem}}
+\setbeamertemplate{itemize subsubitem}{\includegraphics[width=1ex,keepaspectratio]{SubSubItem}}
+\setbeamertemplate{enumerate item}{\hbox to 0.25cm{\fontsize{8}{1em}\fontseries{bx}\selectfont \insertenumlabel .}}
+
+\setbeamertemplate{bibliography item}[text]
+
+\setbeamersize{text margin left=1.5em,text margin right=1.5em}
+
+\def\titleframe{%
+  \addtocounter{framenumber}{-1}%
+  {%
+    \setbeamertemplate{headline}{}%
+    \setbeamertemplate{frametitle}{}%
+    \setbeamertemplate{footline}{}%
+    \setbeamertemplate{background canvas}[vertical shading][top=white,bottom=gray!25]%
+    \frame{\titlepage}%
+  }%
+}
+
+\def\subtitleframe#1{%
+  \addtocounter{framenumber}{-1}%
+  {%
+    \setbeamertemplate{headline}{}%
+    \setbeamertemplate{frametitle}{}%
+    \setbeamertemplate{footline}{}%
+    \frame{\begin{center}\Huge #1\end{center}}%
+  }%
+}
+
+\setbeamertemplate{background canvas}{%
+  \vbox to \dimexpr\paperheight - 1em\relax {%
+    \vfill%
+    \hbox to \paperwidth {\hfill \includegraphics[scale=0.15]{D3SWM}}%
+  }%
+}
+
+\setbeamertemplate{title page}{%
+  \vbox to 1.5cm {%
+    \shadowoffset{0.75pt}\shadowtext{\parbox{\textwidth}{\centering \bf \fontsize{24}{2em}\selectfont \insertfancytitle}}%
+  }%
+  \vspace{2em}%
+  \colorbox{gray}{%
+    \makebox[\textwidth][l]{%
+      \bf \fontsize{6}{1em}\selectfont \color{white} http://d3s.mff.cuni.cz%
+    }%
+  }%
+  \begin{columns}[b]%
+    \begin{column}[T]{\dimexpr 0.5\textwidth - 0.75cm\relax}%
+      \includegraphics[width=4cm,keepaspectratio]{D3S} \\%
+      \vspace{0.25cm}%
+      \hspace{1cm} \includegraphics[width=2cm,keepaspectratio]{CUNI} \\%
+      \vskip-1ex%
+      \makebox[4cm][c]{\bf \fontfamily{ppl}\fontsize{6}{1em}\selectfont \color{gray} CHARLES UNIVERSITY IN PRAGUE} \\%
+      \colorbox{gray}{\makebox[4cm][c]{\bf \fontfamily{ppl}\fontsize{6}{1em}\selectfont \color{white} faculty of mathematics and physics}} \\%
+    \end{column}%
+    \begin{column}[T]{\dimexpr 0.5\textwidth - 0.75cm\relax}%
+      \raggedleft \it%
+      \replace{, }{\\}{\insertauthor}%
+    \end{column}%
+  \end{columns}%
+}
+
+\setbeamertemplate{frametitle}{%
+  \vspace{-1cm}%
+  \fontsize{16}{1em}\selectfont%
+  \shadowoffset{0.75pt}%
+  \hskip-\beamer@leftmargin%
+  \hskip0.25cm%
+  \shadowtext{\insertframetitle}%
+}
+
+\setbeamertemplate{headline}{%
+  {%
+    \pgfdeclarehorizontalshading{beamer@D3S@headlineshading}{1cm}{color(0cm)=(white); color(0.75\paperwidth)=(white); color(\paperwidth)=(gray!25)}%
+    \vbox{%
+      \hbox{\pgfuseshading{beamer@D3S@headlineshading}}%
+      \includegraphics[width=\paperwidth]{Head}%
+    }%
+  }%
+}
+
+\setbeamertemplate{footline}{%
+  \fboxsep=0pt%
+  \colorbox{gray!50}{%
+    \vbox to 8pt {%
+      \vfill%
+      \vspace{0.2em}%
+      \makebox[\paperwidth][c]{%
+        \hspace{1em}%
+        \expandafter\if\csname beamer@D3S@footlineauthor \endcsname1%
+          \scalebox{0.6}{{\bf \insertauthor}, }%
+        \fi%
+        \scalebox{0.6}{\csname beamer@D3S@event \endcsname, \csname beamer@D3S@date \endcsname}%
+        \hfill%
+        \scalebox{0.6}{\bf \insertrunningtitle}%
+        \hfill%
+        \hbox to 1cm {\hfill  \scalebox{0.6}{\insertframenumber}}%
+        \hspace{1em}%
+      }%
+      \vfill%
+    }%
+  }%
+}

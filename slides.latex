@@ -1,0 +1,157 @@
+\pdfminorversion=4
+
+\documentclass{beamer}
+
+\usepackage{color}
+\usepackage{colortbl}
+
+\def\event{{D3S Seminar}}
+%\def\date{{2014-09-23}}
+
+\usetheme[event=\event,footlineauthor]{D3S}
+
+\fancytitle{\vbox{\Huge{}P\huge{}ANDA \\ \large{}Predicate Abstraction in Dynamic Analysis}}
+\runningtitle{PANDA: Predicate Abstraction in Dynamic analysis}
+
+\author{Jakub Daniel}
+
+\begin{document}
+  \titleframe
+
+  \begin{frame}{Deciding Program Safety}
+    \begin{itemize}
+      \item unreachability of error states
+      \item generally undecidable
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}{Deciding Program Safety - Sad Facts}
+    \begin{center}
+      \def\nH{\cellcolor{darkblue}\textcolor{white}}
+      \def\pH{\cellcolor{darkgreen}\textcolor{white}}
+      \def\cH{\cellcolor{darkred}\textcolor{white}}
+      \def\n{\cellcolor{blue!50}}
+      \def\p{\cellcolor{green!50}}
+      \def\c{\cellcolor{red!50}}
+      \begin{tabular}{lll}
+        \nH{\hbox to 10em{\bf Ideas}} & \pH{\hbox to 5em{\bf Pros}} & \cH{\hbox to 6em{\bf Cons}} \\
+        \n Static analysis            & \p Scalable                 & \c Imprecise \\
+        \n Dynamic analysis           & \p Precise                  & \c Low coverage \\
+        \n Overapprox. abs.           & \p Sound                    & \c Imprecise \\
+        \n Underapprox. abs.          & \p Precise                  & \c Unsound \\
+      \end{tabular}
+      \vskip2em
+      \vbox{
+          {\bf All sorts of combinations} \\
+          over+under approx. predicate abstraction \\
+          tests+predicate abstraction \cite{tests} \\
+          concolic testing \cite{concolic} \\
+          \ldots
+      }
+    \end{center}
+    \tiny
+    \begin{thebibliography}{9}
+      \bibitem{tests} DASH
+      \bibitem{concolic} DART
+    \end{thebibliography}
+  \end{frame}
+
+  \begin{frame}{Deciding Program Safety - Trends}
+    \begin{itemize}
+      \item abstraction
+      \item symbolic execution
+      \item underapproximation (tests, \ldots)
+      \item target C (struggle with pointers)
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}{Deciding Program Safety - The {\huge{}P\large{}ANDA} Way}
+    \begin{itemize}
+      \item dynamic analysis % opposed to static
+        \begin{itemize}
+          \item depth first search from initial state
+          \item concrete
+            \begin{itemize}
+              \item underapproximation - precision
+            \end{itemize}
+          \item abstract
+            \begin{itemize}
+              \item overapproximation - soundness, coverage
+              \item predicate data abstraction
+              \item object aliasing
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}{Concrete state space traversal}
+    \begin{columns}[T]
+      \begin{column}{0.45\textwidth}
+        \begin{itemize}
+          \item some feasible traces
+          \item no infeasible traces
+          \item high precision
+        \end{itemize}
+      \end{column}
+      \begin{column}{0.45\textwidth}
+        \includegraphics[keepaspectratio,height=5.5cm]{slides1}
+      \end{column}
+    \end{columns}
+    \vbox to 1cm{
+      \scriptsize
+      \includegraphics[keepaspectratio,height=0.25cm]{slides5}\hskip1ex Concrete trace
+    }
+  \end{frame}
+
+  \begin{frame}{Abstract state space traversal}
+    \begin{columns}[T]
+      \begin{column}{0.45\textwidth}
+        \begin{itemize}
+          \item all feasible traces
+          \item some infeasible traces
+          \item cone of concrete traces to be considered % unlike BMC, symbolic execution, concolic testing
+        \end{itemize}
+      \end{column}
+      \begin{column}{0.45\textwidth}
+        \includegraphics[keepaspectratio,height=5.5cm]{slides2}
+      \end{column}
+    \end{columns}
+    \vbox to 1cm{
+      \scriptsize
+      \includegraphics[keepaspectratio,height=0.25cm]{slides5}\hskip1ex Concrete trace \\
+      \includegraphics[keepaspectratio,height=0.25cm]{slides3}\hskip1ex Reachable with {\bf precise} abstraction \\
+      \includegraphics[keepaspectratio,height=0.25cm]{slides4}\hskip1ex Reachable with {\bf coarse} abstraction \\
+    }
+  \end{frame}
+
+  {
+    \setbeamertemplate{headline}{}
+    \setbeamertemplate{frametitle}{}
+    \setbeamertemplate{footline}{}
+    \begin{frame}
+      \vtop to \vsize {
+        Current state
+        \only<1>{$s_1$}%
+        \only<2>{$s_2$}%
+        \only<3>{$s_3$}%
+        \only<4>{$s_4$}%
+        , trace formula
+        \only<1>{$\varphi_1$}%
+        \only<2>{$\varphi_2$}%
+        \only<3>{$\varphi_3$}%
+        \only<4>{$\varphi_4$}%
+        \\
+        \begin{center}
+          \includegraphics<1>{slides6}
+          \includegraphics<2>{slides7}
+          \includegraphics<3>{slides8}
+          \includegraphics<4>{slides9}
+          \includegraphics<5>{slides10}
+        \end{center}
+      }
+    \end{frame}
+  }
+
+  \subtitleframe{{\Huge{}P\huge{}ANDA} \\\vskip0.5em {\small\color{darkgray}\url{https://github.com/d3sformal/panda}} \small\\ {\scriptsize{}based on \color{darkgray}\url{http://babelfish.arc.nasa.gov/trac/jpf}}}
+
+\end{document}
