@@ -129,17 +129,28 @@
     \setbeamertemplate{frametitle}{}
     \setbeamertemplate{footline}{}
     \begin{frame}
+      \vskip-1cm
       \vtop to \vsize {
-        Current state
-        \only<1>{$s_1$}%
-        \only<2>{$s_2$}%
-        \only<3>{$s_3$}%
-        \only<4>{$s_4$}%
-        , trace formula
-        \only<1>{$\varphi_1$}%
-        \only<2>{$\varphi_2$}%
-        \only<3>{$\varphi_3$}%
-        \only<4>{$\varphi_4$}%
+        \only<1-4,6->{Current state
+          {\bf\tt%
+            \only<1>{$\text{s}_\text{1}$}%
+            \only<2>{$\text{s}_\text{2}$}%
+            \only<3>{$\text{s}_\text{3}$}%
+            \only<4>{$\text{s}_\text{4}$}%
+            \only<6>{$\text{s}_\text{3}'$}%
+            \only<7>{$\text{s}_\text{5}$}%
+          }%
+          , trace formula
+          {\bf\tt%
+            \only<1>{$\varphi_\text{1}$}%
+            \only<2>{$\varphi_\text{2}$}%
+            \only<3>{$\varphi_\text{3}$}%
+            \only<4>{$\varphi_\text{4}$}%
+            \only<6>{$\varphi_\text{3}$}%
+            \only<7>{$\varphi_\text{5}$}%
+          }
+        }%
+        \only<5>{Backtracking over {\bf\tt$\text{s}_\text{3}$} back to {\bf\tt$\text{s}_\text{2}$}}%
         \\
         \begin{center}
           \includegraphics<1>{slides6}
@@ -147,6 +158,8 @@
           \includegraphics<3>{slides8}
           \includegraphics<4>{slides9}
           \includegraphics<5>{slides10}
+          \includegraphics<6>{slides11}
+          \includegraphics<7>{slides12}
         \end{center}
       }
     \end{frame}
