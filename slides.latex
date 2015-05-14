@@ -68,7 +68,7 @@
     \end{itemize}
   \end{frame}
 
-  \begin{frame}{Deciding Program Safety - The {\huge{}P\large{}ANDA} Way}
+  \begin{frame}{Deciding Program Safety - The {P\large{}ANDA} Way}
     \begin{itemize}
       \item dynamic analysis % opposed to static
         \begin{itemize}
