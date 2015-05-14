@@ -1,8 +1,7 @@
 all: slides.pdf
 
-slides.pdf: %.pdf: %.latex %.mp beamerthemeD3S.sty
+slides.pdf: %.pdf: %.latex %.mp beamerthemeD3S.sty algorithm.tex
 	mpost $*.mp
-	pdflatex $*.latex
 	pdflatex $*.latex
 	pdflatex $*.latex
 

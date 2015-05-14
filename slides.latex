@@ -7,6 +7,8 @@
 \usepackage{multirow}
 \usepackage{pifont}
 
+\input algorithm
+
 \newcolumntype{L}{>{\vbox\bgroup\vskip0.75ex\hbox\bgroup\hskip0.25ex}l<{\hskip0.25ex\egroup\egroup}}
 \newcolumntype{R}{>{\vbox\bgroup\vskip0.75ex\hbox\bgroup\hskip0.25ex}r<{\hskip0.25ex\egroup\egroup}}
 \newcommand{\crossmark}{\ding{55}}
@@ -170,22 +172,26 @@
               \strut{}%
               \only<1-3,6>{%
                 %{$\exists M. M \models$ }%
-                {$\models$ }%
                 \only<1>{$\text{s}_\text{1}$}%
                 \only<2>{$\text{s}_\text{2}$}%
                 \only<3>{$\text{s}_\text{3}$}%
                 \only<6>{$\text{s}_\text{3}'$}%
-                { $\wedge$ }%
-                \only<1>{$\text{e}(\text{s}_\text{1}, \text{s}_\text{2})$}%
-                \only<2>{$\text{e}(\text{s}_\text{2}, \text{s}_\text{3})$}%
-                \only<3>{$\text{e}(\text{s}_\text{3}, \text{s}_\text{4})$}%
-                \only<6>{$\text{e}(\text{s}_\text{3}', \text{s}_\text{5})$}%
+                { $\models$ }%
+                \only<1>{$\text{e}(\widehat{\text{s}}_\text{1}, \widehat{\text{s}}_\text{2})$}%
+                \only<2>{$\text{e}(\widehat{\text{s}}_\text{2}, \widehat{\text{s}}_\text{3})$}%
+                \only<3>{$\text{e}(\widehat{\text{s}}_\text{3}, \widehat{\text{s}}_\text{4})$}%
+                \only<6>{$\text{e}(\widehat{\text{s}}_\text{3}, \widehat{\text{s}}_\text{5})$}%
+                { $\implies$ }%
+                \only<1>{$\text{s}_\text{2}$}%
+                \only<2>{$\text{s}_\text{3}$}%
+                \only<3>{$\text{s}_\text{4}$}%
+                \only<6>{$\text{s}_\text{5}$}%
               }
             \end{column}
             \begin{column}{0.45\textwidth}
               \strut{}%
               \only<1-2>{%
-                {$\forall M. M \not\models$ }%
+                {$\forall M\,.\,M \not\models$ }%
                 \only<1>{$\widehat{\text{s}}_\text{1}$}%
                 \only<2>{$\widehat{\text{s}}_\text{2}$}%
                 { $\wedge$ }%
@@ -193,7 +199,7 @@
                 \only<2>{$\text{e}(\widehat{\text{s}}_\text{2}, \widehat{\text{u}}_\text{2})$}%
               }%
               \only<3>{%
-                {$\exists M. M \models$ }%
+                {$\exists M\,.\,M \models$ }%
                 $\varphi_\text{3}$%
                 { $\wedge$ }%
                 $\text{e}(\widehat{\text{s}}_\text{3}, \widehat{\text{s}}_\text{5})$%
@@ -221,9 +227,74 @@
     \end{itemize}
   \end{frame}
 
+  \begin{frame}{{P\large{}ANDA} Algorithm}
+    \scalebox{0.65}{
+      \MyAlgorithm{
+        \MyTwoColumns{
+          \MyFunction{Panda}{P, abs}{
+              \MyAssign{R}{(\{s_0\},\{\})}
+              \MyAssign{tr}{(s_0)}
+              \MyWhile{R \hbox{ changes}}{
+                  \MyAssign{(R,tr,cex)}{\MyCall{unroll}{P,R,tr}}
+                  \MyIf{cex \neq \bot}{
+                      \MyIf*{\MyCall{real}{cex}}{%
+                          \MyReturn{cex}
+                      }
+                      \MyAssign{abs}{\MyCall{refine}{P,abs,cex}}
+                      \MyAssign{(R,tr)}{\MyCall{reset}{R,tr,cex}}
+                  }
+              }
+              \MyReturn{\hbox{\it safe}}
+          }
+          \MyFunction{refine}{P, abs, cex}{
+              \MyAssign{({\cal C}, l_{init}, l_{err})}{P}
+              \MyFor{\varphi_{scp} \in scopes(\varphi_{cex})}{
+                  \MyAssign{L_{scp}}{locs(cex, \varphi_{scp}, {\cal C})}
+                  \MyFor{l \in L_{scp}}{
+                      \MyAssign{p}{itp(\varphi_{scp}, \varphi_{cex}, l)}
+                      \MyIf{p \not\in abs(l)}{
+                          \MyAssign{abs(l)}{abs(l) \cup \{p\}}
+                      }
+                  }
+              }
+              \MyReturn{abs}
+          }
+          \MyVoidLine{}
+        }{
+          \MyFunction{unroll}{P, R, tr}{
+              \MyAssign{({\cal C}, l_{init}, l_{err})}{P}
+              \MyAssign{cex}{\bot}
+              \MyAssign{s}{\hbox{last state of } tr}
+              \MyAssign{\tau}{\hbox{last transition of } tr}
+              \MyIf{\exists a \in unexp(R, {\cal C}, s)}{
+                  \MyAssign{\tau'}{trans(R, tr, s, a)} \MyLabel{line:trans}
+                  \MyAssign{R}{R \oplus \tau'}
+                  \MyAssign{tr}{tr \oplus \tau'}
+              }
+              \MyElse{
+                  \MyAssign{tr}{tr \ominus \tau}
+              }
+              \MyIf{tr \hbox{ reaches } l_{err}}{
+                  \MyAssign{cex}{tr}
+              }
+              \MyReturn{(R,tr,cex)}
+          }
+          \MyVoidLine{}
+          \MyFunction{real}{cex}{
+              \MyReturn{\hbox{is } \varphi_{cex} \hbox{ satisfiable?}} \MyLabel{line:smt}
+          }
+          \MyVoidLine{}
+          \MyFunction{reset}{R,tr,cex}{
+              \MyReturn{( (\{s_0\},\{\}),(s_0) )}
+          }
+        }
+      }
+    }
+  \end{frame}
+
   \begin{frame}{Evaluation}
-    \definecolor{gold}{HTML}{FFD700}
-    \def\fst{\cellcolor{gold}}
+    \def\fst{\cellcolor{orange}}
+    \def\avg{\cellcolor{orange!30}}
     \begin{center}
       \scalebox{0.65}{
         \begin{tabular}{ L || R R R R R R R R }
@@ -232,19 +303,19 @@
         %\cline{2-5}
         \multicolumn{1}{ c ||}{}                             & \multicolumn{1}{ c }{ $t$ } & \multicolumn{1}{ c }{ $|S|$ } & \multicolumn{1}{ c }{ $|abs|$ } & \multicolumn{1}{ c }{ \#sat } & & & & \\
         \hline
-        Array              &        3 s &  29 &  7 &  1809 &             7 s &             2 s &             1 s &            1 s \\
+        Array              &        3 s &  29 &  7 &  1809 &             7 s &             2 s &             1 s &             1 s \\
         %\hline
-        Eureka 01          & \fst  25 s & 741 & 53 & 11462 & \fst \crossmark & \fst \crossmark & \fst \crossmark & \fst   timeout \\
+        Eureka 01          & \fst  25 s & 741 & 53 & 11462 & \fst \crossmark & \fst \crossmark & \fst \crossmark & \fst    timeout \\
         %\hline
-        TREX 03            &        8 s &  53 &  6 &  1885 &      \crossmark &      \crossmark &             1 s &            1 s \\
+        TREX 03            &        8 s &  53 &  6 &  1885 &      \crossmark &      \crossmark &             1 s &             1 s \\
         %\hline
-        Invert string      &        6 s & 126 & 18 &  3103 &      \crossmark &             6 s &      \crossmark &           13 s \\
+        Invert string      & \avg   6 s & 126 & 18 &  3103 & \avg \crossmark & \avg        6 s & \avg \crossmark & \avg       13 s \\
         %\hline
-        Password           &        4 s & 130 & 19 &  2211 &            60 s &             3 s &      \crossmark &            5 s \\
+        Password           &        4 s & 130 & 19 &  2211 &            60 s &             3 s &      \crossmark &             5 s \\
         %\hline
-        Reverse array      &        3 s & 113 & 17 &  2049 &      \crossmark &             3 s &      \crossmark &            3 s \\
+        Reverse array      & \avg   3 s & 113 & 17 &  2049 & \avg \crossmark & \avg        3 s & \avg \crossmark & \avg        3 s \\
         %\hline
-        Two indices        &        2 s &  33 & 15 &  1777 &      \crossmark &             2 s &      \crossmark &            1 s \\
+        Two indices        &        2 s &  33 & 15 &  1777 &      \crossmark &             2 s &      \crossmark &             1 s \\
         %\hline
         Data-flow analysis & \fst 117 s & 358 & 63 &  8458 & \fst \crossmark & \fst \crossmark & \fst \crossmark & \fst \crossmark \\
         %\hline
@@ -252,7 +323,7 @@
         %\hline
         Image rendering    &      260 s & 664 & 13 &  6235 &             1 s &            46 s &      \crossmark &      \crossmark \\
         %\hline
-        Scheduler          &        4 s &  59 & 27 &  2115 &            26 s &             4 s &      \crossmark &             5 s \\
+        Scheduler          & \avg   4 s &  59 & 27 &  2115 & \avg       26 s & \avg        4 s & \avg \crossmark & \avg        5 s \\
         %\hline
         \end{tabular}
       }

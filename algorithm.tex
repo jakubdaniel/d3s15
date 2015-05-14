@@ -1,0 +1,117 @@
+\font\footnotesize=cmr10 at 8pt
+\font\sc=cmcsc10
+
+\newcount\MyIndentation%
+\newcount\MyLineNumber%
+\newdimen\MyIndentationLength%
+
+\def\MyResetLine{\MyLineNumber=0}%
+\def\MyIndentationStep{1.5em}%
+\def\MyIndent{\global\advance\MyIndentation by 1\relax}%
+\def\MyUnIndent{\global\advance\MyIndentation by -1\relax}%
+\def\MyStrut{\leavevmode\hbox{\vrule height1.1em depth0.3em width0pt}}%
+\def\MyClosedLine#1{%
+    \hbox\bgroup\MyLineLabel#1\egroup%
+}%
+\def\MyOpenLine#1{%
+    \ifx\MyInline\MyUndefined%
+        \hbox\bgroup%
+    \fi%
+    \MyLineLabel#1%
+}%
+\def\MyVoidLine{%
+    \hbox{\MyStrut}%
+}%
+\def\MyLineLabel{%
+    \ifx\MyInline\MyUndefined%
+        \global\advance\MyLineNumber by 1\relax%
+        \MyIndentationLength=\MyIndentationStep%
+        \multiply\MyIndentationLength by \MyIndentation%
+        \MyStrut\hbox to 2em {\hfill \footnotesize\the\MyLineNumber:}\hskip1ex\hskip\MyIndentationLength%
+    \fi%
+}%
+\def\MyName#1{{\sc #1}}%
+\def\MyEndLine{\ignorespaces%
+    \ifx\MyInline\MyUndefined%
+    \else%
+        \egroup%
+    \fi%
+    \let\MyInline\MyUndefined%
+}%
+\def\MyBody#1{\ignorespaces%
+    \MyEndLine%
+    \MyIndent%
+    \vbox{%
+        #1%
+    }%
+    \MyUnIndent%
+}%
+\def\MyCallable#1#2#3#4{{%
+    \vtop{%
+        \MyClosedLine{{\bf #1} \MyName{#2}$\left(#3\right)$}%
+        \MyBody{#4}%
+    }%
+}}%
+
+\def\MyProcedure#1#2#3{\MyCallable{procedure}{#1}{#2}{#3}}%
+\def\MyFunction#1#2#3{\MyCallable{function}{#1}{#2}{#3}}%
+\def\MyCall#1#2{\hbox{\sc{#1}}\!\left(#2\right)}%
+
+\def\MyBreakFor#1#2{\MyClosedLine{{\bf{for}} $#1$ {\bf{do}}}\MyBody{#2}}%
+\def\MyBreakWhile#1#2{\MyClosedLine{{\bf{while}} $#1$ {\bf{do}}}\MyBody{#2}}%
+\def\MyBreakDo#1#2{\MyClosedLine{{\bf{do}}}\MyBody{#1}\MyClosedLine{{\bf{while}} $#2$}}%
+\def\MyBreakIf#1#2{\MyClosedLine{{\bf{if}} $#1$ {\bf{then}}}\MyBody{#2}}%
+\def\MyBreakElse#1{\MyClosedLine{{\bf{else}}}\MyBody{#1}}%
+\def\MyBreakAssert#1{\MyClosedLine{{\bf{assert}} $#1$}\MyEndLine}%
+\def\MyBreakAssign#1#2{\MyClosedLine{$#1 \gets #2$}\MyEndLine}%
+\def\MyBreakReturn#1{\MyClosedLine{{\bf{return}} $#1$}\MyEndLine}%
+
+\def\MyInlineFor#1#2{\MyOpenLine{{\bf{for}} $#1$ {\bf{do}}\def\MyInline{} \ignorespaces#2}}%
+\def\MyInlineWhile#1#2{\MyOpenLine{{\bf{while}} $#1$ {\bf{do}}\def\MyInline{} \ignorespaces#2}}%
+\def\MyInlineDo#1#2{\MyOpenLine{{\bf{do}}\def\MyInline{} {\def\MyEndLine{}\ignorespaces#1} {\bf{while}} $#2$\MyEndLine}}%
+\def\MyInlineIf#1#2{\MyOpenLine{{\bf{if}} $#1$ {\bf{then}}\def\MyInline{} \ignorespaces#2}}%
+\def\MyInlineElse#1{\MyOpenLine{{\bf{else}}\def\MyInline{} \ignorespaces#1}}%
+\def\MyInlineAssert#1{\MyOpenLine{{\bf{assert}} $#1$ }}%
+\def\MyInlineAssign#1#2{\MyOpenLine{$#1 \gets #2$ }}%
+\def\MyInlineReturn#1{\MyOpenLine{{\bf{return}} $#1$ }}%
+
+\def\MyLine#1{\ifx#1*\expandafter\MyOpenLine\else\MyClosedLine{#1}\MyEndLine\fi}%
+\def\MyFor#1#2{\ifx#1*\expandafter\MyInlineFor{#2}\else\MyBreakFor{#1}{#2}\fi}%
+\def\MyWhile#1#2{\ifx#1*\expandafter\MyInlineWhile{#2}\else\MyBreakWhile{#1}{#2}\fi}%
+\def\MyDo#1#2{\ifx#1*\expandafter\MyInlineDo{#2}\else\MyBreakDo{#1}{#2}\fi}%
+\def\MyIf#1#2{\ifx#1*\expandafter\MyInlineIf{#2}\else\MyBreakIf{#1}{#2}\fi}%
+\def\MyElse#1{\ifx#1*\expandafter\MyInlineElse\else\MyBreakElse{#1}\fi}%
+\def\MyAssert#1{\ifx#1*\expandafter\MyInlineAssert\else\MyBreakAssert{#1}\fi}%
+\def\MyAssign#1#2{\ifx#1*\expandafter\MyInlineAssign{#2}\else\MyBreakAssign{#1}{#2}\fi}%
+\def\MyReturn#1{\ifx#1*\expandafter\MyInlineReturn\else\MyBreakReturn{#1}\fi}%
+
+\def\MyLabel#1{\expandafter\global\expandafter\edef\csname MyAlgorithm@#1 \endcsname{\the\MyLineNumber}}%
+\def\MyRef#1{line~\csname MyAlgorithm@#1 \endcsname}%
+
+\def\MyTwoColumns#1#2{%
+    \let\mybox\hbox%
+    \hfill%
+    \hbox{%
+        \mybox{%
+            \vtop{%
+                #1%
+            }%
+        }%
+        \hfill%
+        \hskip3em%
+        \mybox{%
+            \vtop{%
+                #2%
+            }%
+        }%
+    }%
+    \hfill%
+}%
+
+\def\MyAlgorithm#1{%
+    \begingroup%
+    \MyResetLine%
+    \noindent%
+    \vbox{#1}%
+    \endgroup%
+}
