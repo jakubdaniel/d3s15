@@ -6,7 +6,4 @@ slides.pdf: %.pdf: %.latex %.mp beamerthemeD3S.sty algorithm.tex
 	pdflatex $*.latex
 
 present: all
-	dspdfviewer -f slides.pdf
-
-present-comments: all
-	dspdfviewer slides-comments.pdf
+	dspdfviewer -a no -f slides.pdf
