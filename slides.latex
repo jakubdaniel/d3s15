@@ -4,6 +4,12 @@
 
 \usepackage{color}
 \usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{pifont}
+
+\newcolumntype{L}{>{\vbox\bgroup\vskip0.75ex\hbox\bgroup\hskip0.25ex}l<{\hskip0.25ex\egroup\egroup}}
+\newcolumntype{R}{>{\vbox\bgroup\vskip0.75ex\hbox\bgroup\hskip0.25ex}r<{\hskip0.25ex\egroup\egroup}}
+\newcommand{\crossmark}{\ding{55}}
 
 \def\event{{D3S Seminar}}
 %\def\date{{2014-09-23}}
@@ -27,18 +33,13 @@
 
   \begin{frame}{Deciding Program Safety - Sad Facts}
     \begin{center}
-      \def\nH{\cellcolor{darkblue}\textcolor{white}}
-      \def\pH{\cellcolor{darkgreen}\textcolor{white}}
-      \def\cH{\cellcolor{darkred}\textcolor{white}}
-      \def\n{\cellcolor{blue!50}}
-      \def\p{\cellcolor{green!50}}
-      \def\c{\cellcolor{red!50}}
+      \def\p{\color{darkgreen}}
+      \def\c{\color{darkred}}
       \begin{tabular}{lll}
-        \nH{\hbox to 10em{\bf Ideas}} & \pH{\hbox to 5em{\bf Pros}} & \cH{\hbox to 6em{\bf Cons}} \\
-        \n Static analysis            & \p Scalable                 & \c Imprecise \\
-        \n Dynamic analysis           & \p Precise                  & \c Low coverage \\
-        \n Overapprox. abs.           & \p Sound                    & \c Imprecise \\
-        \n Underapprox. abs.          & \p Precise                  & \c Unsound \\
+        Static analysis            & \p Scalable                 & \c Imprecise \\
+        Dynamic analysis           & \p Precise                  & \c Low coverage \\
+        Overapprox. abs.           & \p Sound                    & \c Imprecise \\
+        Underapprox. abs.          & \p Precise                  & \c Unsound \\
       \end{tabular}
       \vskip2em
       \vbox{
@@ -131,8 +132,8 @@
     \begin{frame}
       \vskip-1cm
       \vtop to \vsize {
-        \only<1-4,6->{Current state
-          {\bf\tt%
+        \only<1-4,6->{\strut{}Current state
+          {\tt%
             \only<1>{$\text{s}_\text{1}$}%
             \only<2>{$\text{s}_\text{2}$}%
             \only<3>{$\text{s}_\text{3}$}%
@@ -140,17 +141,18 @@
             \only<6>{$\text{s}_\text{3}'$}%
             \only<7>{$\text{s}_\text{5}$}%
           }%
-          , trace formula
-          {\bf\tt%
-            \only<1>{$\varphi_\text{1}$}%
-            \only<2>{$\varphi_\text{2}$}%
-            \only<3>{$\varphi_\text{3}$}%
-            \only<4>{$\varphi_\text{4}$}%
-            \only<6>{$\varphi_\text{3}$}%
-            \only<7>{$\varphi_\text{5}$}%
+          \only<3>{, trace formula
+            {\tt%
+              \only<1>{$\varphi_\text{1}$}%
+              \only<2>{$\varphi_\text{2}$}%
+              \only<3>{$\varphi_\text{3}$}%
+              \only<4>{$\varphi_\text{4}$}%
+              \only<6>{$\varphi_\text{3}$}%
+              \only<7>{$\varphi_\text{5}$}%
+            }
           }
         }%
-        \only<5>{Backtracking over {\bf\tt$\text{s}_\text{3}$} back to {\bf\tt$\text{s}_\text{2}$}}%
+        \only<5>{\strut{}Backtracking over {\tt$\text{s}_\text{3}$} back to {\tt$\text{s}_\text{2}$}}%
         \\
         \begin{center}
           \includegraphics<1>{slides6}
@@ -161,9 +163,101 @@
           \includegraphics<6>{slides11}
           \includegraphics<7>{slides12}
         \end{center}
+        \begin{columns}[T]
+          \only<1-4,6>{
+            \tt
+            \begin{column}{0.45\textwidth}
+              \strut{}%
+              \only<1-3,6>{%
+                %{$\exists M. M \models$ }%
+                {$\models$ }%
+                \only<1>{$\text{s}_\text{1}$}%
+                \only<2>{$\text{s}_\text{2}$}%
+                \only<3>{$\text{s}_\text{3}$}%
+                \only<6>{$\text{s}_\text{3}'$}%
+                { $\wedge$ }%
+                \only<1>{$\text{e}(\text{s}_\text{1}, \text{s}_\text{2})$}%
+                \only<2>{$\text{e}(\text{s}_\text{2}, \text{s}_\text{3})$}%
+                \only<3>{$\text{e}(\text{s}_\text{3}, \text{s}_\text{4})$}%
+                \only<6>{$\text{e}(\text{s}_\text{3}', \text{s}_\text{5})$}%
+              }
+            \end{column}
+            \begin{column}{0.45\textwidth}
+              \strut{}%
+              \only<1-2>{%
+                {$\forall M. M \not\models$ }%
+                \only<1>{$\widehat{\text{s}}_\text{1}$}%
+                \only<2>{$\widehat{\text{s}}_\text{2}$}%
+                { $\wedge$ }%
+                \only<1>{$\text{e}(\widehat{\text{s}}_\text{1}, \widehat{\text{u}}_\text{1})$}%
+                \only<2>{$\text{e}(\widehat{\text{s}}_\text{2}, \widehat{\text{u}}_\text{2})$}%
+              }%
+              \only<3>{%
+                {$\exists M. M \models$ }%
+                $\varphi_\text{3}$%
+                { $\wedge$ }%
+                $\text{e}(\widehat{\text{s}}_\text{3}, \widehat{\text{s}}_\text{5})$%
+              }%
+            \end{column}
+          }%
+          \only<5,7>{
+            \begin{column}{\textwidth}
+              \only<5>{%
+                \strut{}Suppose {\tt$\varphi_\text{3} \wedge \text{e}(\widehat{\text{s}}_\text{3}, \widehat{\text{s}}_\text{5})$} permits interpretation of {\tt$\text{e}(\widehat{\text{s}}_\text{2}, \widehat{\text{s}}_\text{3})$} yielding {\tt$\text{s}_\text{3}'$}%
+              }%
+              \only<7>{%
+                \strut{}Entire state space explored%
+              }%
+            \end{column}
+          }
+        \end{columns}
       }
     \end{frame}
   }
+
+  \begin{frame}{Refinement}
+    \begin{itemize}
+      \item Nested interpolants
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}{Evaluation}
+    \definecolor{gold}{HTML}{FFD700}
+    \def\fst{\cellcolor{gold}}
+    \begin{center}
+      \scalebox{0.65}{
+        \begin{tabular}{ L || R R R R R R R R }
+        %\hline
+        \multicolumn{1}{ c ||}{\multirow{2}{*}{ Benchmark }} & \multicolumn{4}{ c }{P\footnotesize{}ANDA} & \multirow{2}{*}{B\footnotesize{}LAST} & \multirow{2}{*}{CPA\footnotesize{}CHECKER} & \multirow{2}{*}{U\footnotesize{}FO} & \multirow{2}{*}{W\footnotesize{}OLVERINE} \\
+        %\cline{2-5}
+        \multicolumn{1}{ c ||}{}                             & \multicolumn{1}{ c }{ $t$ } & \multicolumn{1}{ c }{ $|S|$ } & \multicolumn{1}{ c }{ $|abs|$ } & \multicolumn{1}{ c }{ \#sat } & & & & \\
+        \hline
+        Array              &        3 s &  29 &  7 &  1809 &             7 s &             2 s &             1 s &            1 s \\
+        %\hline
+        Eureka 01          & \fst  25 s & 741 & 53 & 11462 & \fst \crossmark & \fst \crossmark & \fst \crossmark & \fst   timeout \\
+        %\hline
+        TREX 03            &        8 s &  53 &  6 &  1885 &      \crossmark &      \crossmark &             1 s &            1 s \\
+        %\hline
+        Invert string      &        6 s & 126 & 18 &  3103 &      \crossmark &             6 s &      \crossmark &           13 s \\
+        %\hline
+        Password           &        4 s & 130 & 19 &  2211 &            60 s &             3 s &      \crossmark &            5 s \\
+        %\hline
+        Reverse array      &        3 s & 113 & 17 &  2049 &      \crossmark &             3 s &      \crossmark &            3 s \\
+        %\hline
+        Two indices        &        2 s &  33 & 15 &  1777 &      \crossmark &             2 s &      \crossmark &            1 s \\
+        %\hline
+        Data-flow analysis & \fst 117 s & 358 & 63 &  8458 & \fst \crossmark & \fst \crossmark & \fst \crossmark & \fst \crossmark \\
+        %\hline
+        Cycling race       &        4 s &  87 & 28 &  2283 &             5 s &             3 s &             2 s &             3 s \\
+        %\hline
+        Image rendering    &      260 s & 664 & 13 &  6235 &             1 s &            46 s &      \crossmark &      \crossmark \\
+        %\hline
+        Scheduler          &        4 s &  59 & 27 &  2115 &            26 s &             4 s &      \crossmark &             5 s \\
+        %\hline
+        \end{tabular}
+      }
+    \end{center}
+  \end{frame}
 
   \subtitleframe{{\Huge{}P\huge{}ANDA} \\\vskip0.5em {\small\color{darkgray}\url{https://github.com/d3sformal/panda}} \small\\ {\scriptsize{}based on \color{darkgray}\url{http://babelfish.arc.nasa.gov/trac/jpf}}}
 

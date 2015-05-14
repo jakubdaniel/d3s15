@@ -25,6 +25,18 @@ color darkgreen; darkgreen := (28/255, 192/255, 0);
 color gray; gray := (192/255, 192/255, 192/255);
 color darkgray; darkgray := (86/255, 86/255, 86/255);
 
+color orange; orange := (240/255, 176/255, 0);
+color darkorange; darkorange := (192/255, 112/255, 0);
+
+color abs; abs := blue;
+color darkabs; darkabs := darkblue;
+
+color con; con := orange;
+color darkcon; darkcon := darkorange;
+
+color coa; coa := gray;
+color darkcoa; darkcoa := darkgray;
+
 def node(expr o, l, ci, cii) =
   begingroup
     picture r;
@@ -82,40 +94,40 @@ enddef;
 picture ctrav, atrav;
 
 ctrav := image(
-  draw edge((0, 0), (1.5u,  u), btex etex, darkgreen);
-  draw edge((0, 0), (1.5u, -u), btex etex, darkgray);
+  draw edge((0, 0), (1.5u,  u), btex etex, darkcon);
+  draw edge((0, 0), (1.5u, -u), btex etex, darkcoa);
 
-  draw edge((1.5u, u), (1.5u, -u), btex etex, darkgray);
-  draw edge((1.5u, u), (  3u, 2u), btex etex, darkgray);
-  draw edge((1.5u, u), (  3u,  0), btex etex, darkgreen);
+  draw edge((1.5u, u), (1.5u, -u), btex etex, darkcoa);
+  draw edge((1.5u, u), (  3u, 2u), btex etex, darkcoa);
+  draw edge((1.5u, u), (  3u,  0), btex etex, darkcon);
 
-  draw edge((1.5u, -u), (3u, -2u), btex etex, darkgray);
+  draw edge((1.5u, -u), (3u, -2u), btex etex, darkcoa);
 
-  draw edge((3u, 2u), (  3u,  0), btex etex, darkgray);
-  draw edge((3u, 2u), (4.5u, 3u), btex etex, darkgray);
-  draw edge((3u, 2u), (4.5u,  u), btex etex, darkgray);
+  draw edge((3u, 2u), (  3u,  0), btex etex, darkcoa);
+  draw edge((3u, 2u), (4.5u, 3u), btex etex, darkcoa);
+  draw edge((3u, 2u), (4.5u,  u), btex etex, darkcoa);
 
-  draw edge((3u, 0), (4.5u,  u), btex etex, darkgreen);
-  draw edge((3u, 0), (4.5u, -u), btex etex, darkgray);
+  draw edge((3u, 0), (4.5u,  u), btex etex, darkcon);
+  draw edge((3u, 0), (4.5u, -u), btex etex, darkcoa);
 
-  draw edge((3u, -2u), (4.5u,  -u), btex etex, darkgray);
-  draw edge((3u, -2u), (4.5u, -3u), btex etex, darkgray);
+  draw edge((3u, -2u), (4.5u,  -u), btex etex, darkcoa);
+  draw edge((3u, -2u), (4.5u, -3u), btex etex, darkcoa);
 
-  draw edge((4.5u, -3u), (4.5u, -u), btex etex, darkgray);
+  draw edge((4.5u, -3u), (4.5u, -u), btex etex, darkcoa);
 
-  draw node((0, 0), btex etex, darkgreen, green);
+  draw node((0, 0), btex etex, darkcon, con);
 
-  draw node((1.5u,  u), btex etex, darkgreen, green);
-  draw node((1.5u, -u), btex etex, darkgray, gray);
+  draw node((1.5u,  u), btex etex, darkcon, con);
+  draw node((1.5u, -u), btex etex, darkcoa, coa);
 
-  draw node((3u,  2u), btex etex, darkgray, gray);
-  draw node((3u,   0), btex etex, darkgreen, green);
-  draw node((3u, -2u), btex etex, darkgray, gray);
+  draw node((3u,  2u), btex etex, darkcoa, coa);
+  draw node((3u,   0), btex etex, darkcon, con);
+  draw node((3u, -2u), btex etex, darkcoa, coa);
 
-  draw node((4.5u,  3u), btex etex, darkgray, gray);
-  draw node((4.5u,   u), btex etex, darkgreen, green);
-  draw node((4.5u,  -u), btex etex, darkgray, gray);
-  draw node((4.5u, -3u), btex etex, darkgray, gray);
+  draw node((4.5u,  3u), btex etex, darkcoa, coa);
+  draw node((4.5u,   u), btex etex, darkcon, con);
+  draw node((4.5u,  -u), btex etex, darkcoa, coa);
+  draw node((4.5u, -3u), btex etex, darkcoa, coa);
 );
 
 atrav := image(
@@ -157,10 +169,10 @@ atrav := image(
 %  enter := angle direction 0                of absshape;
 %  leave := angle direction length(absshape) of absshape;
 %
-%  fill xi .. {dir enter}absshape{dir leave} .. yi -- cycle withcolor 0.5 blue + 0.5 white;
-%  draw absshape withpen pencircle scaled 1.5 withcolor darkblue;
-%  drawarrow a{dir (180 + enter)} .. xi -- xii withpen pencircle scaled 1.5 withcolor darkblue dashed evenly;
-%  drawarrow j{dir (      leave)} .. yi -- yii withpen pencircle scaled 1.5 withcolor darkblue dashed evenly;
+%  fill xi .. {dir enter}absshape{dir leave} .. yi -- cycle withcolor 0.5 abs + 0.5 white;
+%  draw absshape withpen pencircle scaled 1.5 withcolor darkabs;
+%  drawarrow a{dir (180 + enter)} .. xi -- xii withpen pencircle scaled 1.5 withcolor darkabs dashed evenly;
+%  drawarrow j{dir (      leave)} .. yi -- yii withpen pencircle scaled 1.5 withcolor darkabs dashed evenly;
 
   pair xi, xii, xiii, yi, yii, yiii;
   path envelope, envelopei, envelopeii, envelopeiii, envelopeiv, envelopev;
@@ -203,45 +215,45 @@ atrav := image(
 
   arc := yii {dir 60} .. {dir 110} xii;
 
-  fill (xii {dir (180 + angle (1.5u, u))} .. envelope .. yii) -- arc -- cycle withcolor 0.5blue + 0.5white;
-  drawarrow xi{dir (180 + enter)} .. {dir angle (1.5u, u)} xii -- xiii withpen pencircle scaled 1.5 withcolor darkblue dashed evenly;
-  drawarrow yi{dir        leave } .. yii -- yiii withpen pencircle scaled 1.5 withcolor darkblue dashed evenly;
-  draw envelope withpen pencircle scaled 1.5 withcolor darkblue;
+  fill (xii {dir (180 + angle (1.5u, u))} .. envelope .. yii) -- arc -- cycle withcolor 0.5abs + 0.5white;
+  drawarrow xi{dir (180 + enter)} .. {dir angle (1.5u, u)} xii -- xiii withpen pencircle scaled 1.5 withcolor darkabs dashed evenly;
+  drawarrow yi{dir        leave } .. yii -- yiii withpen pencircle scaled 1.5 withcolor darkabs dashed evenly;
+  draw envelope withpen pencircle scaled 1.5 withcolor darkabs;
 
-  draw edge((0, 0), (1.5u,  u), btex etex, darkgreen);
-  draw edge((0, 0), (1.5u, -u), btex etex, darkgray);
+  draw edge((0, 0), (1.5u,  u), btex etex, darkcon);
+  draw edge((0, 0), (1.5u, -u), btex etex, darkcoa);
 
-  draw edge((1.5u, u), (1.5u, -u), btex etex, darkgray);
-  draw edge((1.5u, u), (  3u, 2u), btex etex, darkgray);
-  draw edge((1.5u, u), (  3u,  0), btex etex, darkgreen);
+  draw edge((1.5u, u), (1.5u, -u), btex etex, darkcoa);
+  draw edge((1.5u, u), (  3u, 2u), btex etex, darkcoa);
+  draw edge((1.5u, u), (  3u,  0), btex etex, darkcon);
 
-  draw edge((1.5u, -u), (3u, -2u), btex etex, darkgray);
+  draw edge((1.5u, -u), (3u, -2u), btex etex, darkcoa);
 
-  draw edge((3u, 2u), (  3u,  0), btex etex, darkgray);
-  draw edge((3u, 2u), (4.5u, 3u), btex etex, darkgray);
-  draw edge((3u, 2u), (4.5u,  u), btex etex, darkgray);
+  draw edge((3u, 2u), (  3u,  0), btex etex, darkcoa);
+  draw edge((3u, 2u), (4.5u, 3u), btex etex, darkcoa);
+  draw edge((3u, 2u), (4.5u,  u), btex etex, darkcoa);
 
-  draw edge((3u, 0), (4.5u,  u), btex etex, darkgreen);
-  draw edge((3u, 0), (4.5u, -u), btex etex, darkblue);
+  draw edge((3u, 0), (4.5u,  u), btex etex, darkcon);
+  draw edge((3u, 0), (4.5u, -u), btex etex, darkabs);
 
-  draw edge((3u, -2u), (4.5u,  -u), btex etex, darkgray);
-  draw edge((3u, -2u), (4.5u, -3u), btex etex, darkgray);
+  draw edge((3u, -2u), (4.5u,  -u), btex etex, darkcoa);
+  draw edge((3u, -2u), (4.5u, -3u), btex etex, darkcoa);
 
-  draw edge((4.5u, -3u), (4.5u, -u), btex etex, darkgray);
+  draw edge((4.5u, -3u), (4.5u, -u), btex etex, darkcoa);
 
-  draw node((0, 0), btex etex, darkgreen, green);
+  draw node((0, 0), btex etex, darkcon, con);
 
-  draw node((1.5u,  u), btex etex, darkgreen, green);
-  draw node((1.5u, -u), btex etex, darkgray, gray);
+  draw node((1.5u,  u), btex etex, darkcon, con);
+  draw node((1.5u, -u), btex etex, darkcoa, coa);
 
-  draw node((3u,  2u), btex etex, darkgray, gray);
-  draw node((3u,   0), btex etex, darkgreen, green);
-  draw node((3u, -2u), btex etex, darkgray, gray);
+  draw node((3u,  2u), btex etex, darkcoa, coa);
+  draw node((3u,   0), btex etex, darkcon, con);
+  draw node((3u, -2u), btex etex, darkcoa, coa);
 
-  draw node((4.5u,  3u), btex etex, darkgray, gray);
-  draw node((4.5u,   u), btex etex, darkgreen, green);
-  draw node((4.5u,  -u), btex etex, darkblue, blue);
-  draw node((4.5u, -3u), btex etex, darkgray, gray);
+  draw node((4.5u,  3u), btex etex, darkcoa, coa);
+  draw node((4.5u,   u), btex etex, darkcon, con);
+  draw node((4.5u,  -u), btex etex, darkabs, abs);
+  draw node((4.5u, -3u), btex etex, darkcoa, coa);
 );
 
 beginfig(1)
@@ -257,54 +269,54 @@ beginfig(2)
 endfig;
 
 beginfig(3)
-  draw node((0, 0), btex etex, darkblue, blue);
+  draw node((0, 0), btex etex, darkabs, abs);
 endfig;
 
 beginfig(4)
-  draw node((0, 0), btex etex, darkgray, gray);
+  draw node((0, 0), btex etex, darkcoa, coa);
 endfig;
 
 beginfig(5)
-  %draw edge((0, 0), (0.5u, 0.5u), btex etex, darkgreen);
-  draw node((0, 0), btex etex, darkgreen, green);
+  %draw edge((0, 0), (0.5u, 0.5u), btex etex, darkcon);
+  draw node((0, 0), btex etex, darkcon, con);
 endfig;
 
 picture s, si, sii, siii, siv, tv, tvi, tvii;
 picture t, ti, tii, tiii, tiv, sv, svi, svii;
 
 si := image(
-  draw node((0, 0), btex etex, darkgreen, green);
+  draw node((0, 0), btex etex, darkcon, con);
 );
 
 sii := image(
-  draw edge((0, 0), (1.5u, u), btex etex, darkgreen);
-  draw node((1.5u, u), btex etex, darkgreen, green);
+  draw edge((0, 0), (1.5u, u), btex etex, darkcon);
+  draw node((1.5u, u), btex etex, darkcon, con);
   draw si;
 );
 
 siii := image(
-  draw edge((1.5u, u), (3u, 0), btex etex, darkgreen);
-  draw node((3u, 0), btex etex, darkgreen, green);
+  draw edge((1.5u, u), (3u, 0), btex etex, darkcon);
+  draw node((3u, 0), btex etex, darkcon, con);
   draw sii;
 );
 
 siv := image(
-  draw edge((3u, 0), (4.5u, u), btex etex, darkgreen);
-  draw node((4.5u, u), btex etex, darkgreen, green);
+  draw edge((3u, 0), (4.5u, u), btex etex, darkcon);
+  draw node((4.5u, u), btex etex, darkcon, con);
   draw siii;
 );
 
 sv := image(
-  draw edge((1.5u, u), (3u, 0), btex etex, 0.5darkgreen + 0.5white);
-  draw edge((3u, 0), (4.5u, u), btex etex, 0.5darkgreen + 0.5white);
-  draw node((3u, 0), btex etex, 0.5darkgreen + 0.5white, 0.5green + 0.5white);
-  draw node((4.5u, u), btex etex, 0.5darkgreen + 0.5white, 0.5green + 0.5white);
+  draw edge((1.5u, u), (3u, 0), btex etex, 0.5darkcon + 0.5white);
+  draw edge((3u, 0), (4.5u, u), btex etex, 0.5darkcon + 0.5white);
+  draw node((3u, 0), btex etex, 0.5darkcon + 0.5white, 0.5con + 0.5white);
+  draw node((4.5u, u), btex etex, 0.5darkcon + 0.5white, 0.5con + 0.5white);
   draw sii;
 );
 
 svi := image(
-  draw edge((3u, 0), (4.5u, u), btex etex, 0.5darkgreen + 0.5white);
-  draw node((4.5u, u), btex etex, 0.5darkgreen + 0.5white, 0.5green + 0.5white);
+  draw edge((3u, 0), (4.5u, u), btex etex, 0.5darkcon + 0.5white);
+  draw node((4.5u, u), btex etex, 0.5darkcon + 0.5white, 0.5con + 0.5white);
   draw siii;
 );
 
@@ -337,22 +349,22 @@ ti := image(
     enter := angle direction 0 of a;
     leave := angle direction length(a) of a;
 
-    fill (xii .. a .. yii) -- cycle withcolor 0.5blue + 0.5white;
-    drawarrow xi{dir (180 + enter)} .. xii -- xiii withpen pencircle scaled 1.5 withcolor darkblue dashed evenly;
-    drawarrow yi{dir        leave } .. yii -- yiii withpen pencircle scaled 1.5 withcolor darkblue dashed evenly;
-    draw a withpen pencircle scaled 1.5 withcolor darkblue;
+    fill (xii .. a .. yii) -- cycle withcolor 0.5abs + 0.5white;
+    drawarrow xi{dir (180 + enter)} .. xii -- xiii withpen pencircle scaled 1.5 withcolor darkabs dashed evenly;
+    drawarrow yi{dir        leave } .. yii -- yiii withpen pencircle scaled 1.5 withcolor darkabs dashed evenly;
+    draw a withpen pencircle scaled 1.5 withcolor darkabs;
   );
 
   draw envelope rotated angle (1.5u, u);
-  draw edge((0, 0), (1.5u, u), btex etex, darkgreen);
-  draw edge((0, 0), (1.5u, -u), btex etex, darkgray);
-  draw node((1.5u,  u), btex etex, darkgray, gray);
-  draw node((1.5u, -u), btex etex, darkgray, gray);
+  draw edge((0, 0), (1.5u, u), btex etex, darkcon);
+  draw edge((0, 0), (1.5u, -u), btex etex, darkcoa);
+  draw node((1.5u,  u), btex etex, darkcoa, coa);
+  draw node((1.5u, -u), btex etex, darkcoa, coa);
   draw si;
 
-  label(btex \bf\tt\large $\text{s}_\text{1}$ etex, (   0,  0)) withcolor 0.5darkgreen;
-  label(btex \bf\tt\large $\text{u}_\text{1}$ etex, (1.5u, -u)) withcolor 0.5darkgray;
-  label(btex \bf\tt\large $\text{s}_\text{2}$ etex, (1.5u,  u)) withcolor 0.5darkgray;
+  label(btex \tt\large $\text{s}_\text{1}$ etex, (   0,  0)) withcolor 0.5darkcon;
+  label(btex \tt\large $\text{u}_\text{1}$ etex, (1.5u, -u)) withcolor 0.5darkcoa;
+  label(btex \tt\large $\text{s}_\text{2}$ etex, (1.5u,  u)) withcolor 0.5darkcoa;
 );
 
 tii := image(
@@ -391,24 +403,24 @@ tii := image(
   enter := angle direction 0 of envelope;
   leave := angle direction length(envelope) of envelope;
 
-  fill (xii .. envelope .. yii) -- cycle withcolor 0.5blue + 0.5white;
-  drawarrow xi{dir (180 + enter)} .. xii -- xiii withpen pencircle scaled 1.5 withcolor darkblue dashed evenly;
-  drawarrow yi{dir        leave } .. yii -- yiii withpen pencircle scaled 1.5 withcolor darkblue dashed evenly;
-  draw envelope withpen pencircle scaled 1.5 withcolor darkblue;
+  fill (xii .. envelope .. yii) -- cycle withcolor 0.5abs + 0.5white;
+  drawarrow xi{dir (180 + enter)} .. xii -- xiii withpen pencircle scaled 1.5 withcolor darkabs dashed evenly;
+  drawarrow yi{dir        leave } .. yii -- yiii withpen pencircle scaled 1.5 withcolor darkabs dashed evenly;
+  draw envelope withpen pencircle scaled 1.5 withcolor darkabs;
 
-  draw edge((0, 0), (1.5u, -u), btex etex, 0.5darkgray + 0.5white);
-  draw edge((1.5u, u), (3u, 2u), btex etex, darkgray);
-  draw edge((1.5u, u), (3u,  0), btex etex, darkgreen);
+  draw edge((0, 0), (1.5u, -u), btex etex, 0.5darkcoa + 0.5white);
+  draw edge((1.5u, u), (3u, 2u), btex etex, darkcoa);
+  draw edge((1.5u, u), (3u,  0), btex etex, darkcon);
 
-  draw node((1.5u, -u), btex etex, 0.5darkgray + 0.5white, 0.5gray + 0.5white);
-  draw node((3u, 2u), btex etex, darkgray, gray);
-  draw node((3u,  0), btex etex, darkgray, gray);
+  draw node((1.5u, -u), btex etex, 0.5darkcoa + 0.5white, 0.5coa + 0.5white);
+  draw node((3u, 2u), btex etex, darkcoa, coa);
+  draw node((3u,  0), btex etex, darkcoa, coa);
 
   draw sii;
 
-  label(btex \bf\tt\large $\text{s}_\text{2}$ etex, (1.5u,  u)) withcolor 0.5darkgreen;
-  label(btex \bf\tt\large $\text{u}_\text{2}$ etex, (  3u, 2u)) withcolor 0.5darkgray;
-  label(btex \bf\tt\large $\text{s}_\text{3}$ etex, (  3u,  0)) withcolor 0.5darkgray;
+  label(btex \tt\large $\text{s}_\text{2}$ etex, (1.5u,  u)) withcolor 0.5darkcon;
+  label(btex \tt\large $\text{u}_\text{2}$ etex, (  3u, 2u)) withcolor 0.5darkcoa;
+  label(btex \tt\large $\text{s}_\text{3}$ etex, (  3u,  0)) withcolor 0.5darkcoa;
 );
 
 tiii := image(
@@ -449,26 +461,26 @@ tiii := image(
   enter := angle direction 0 of envelope;
   leave := angle direction length(envelope) of envelope;
 
-  fill (xii {dir (180 + angle (1.5u, u))} .. envelope .. yii) -- cycle withcolor 0.5blue + 0.5white;
-  drawarrow xi{dir (180 + enter)} .. {dir angle (1.5u, u)} xii -- xiii withpen pencircle scaled 1.5 withcolor darkblue dashed evenly;
-  drawarrow yi{dir        leave } .. yii -- yiii withpen pencircle scaled 1.5 withcolor darkblue dashed evenly;
-  draw envelope withpen pencircle scaled 1.5 withcolor darkblue;
+  fill (xii {dir (180 + angle (1.5u, u))} .. envelope .. yii) -- cycle withcolor 0.5abs + 0.5white;
+  drawarrow xi{dir (180 + enter)} .. {dir angle (1.5u, u)} xii -- xiii withpen pencircle scaled 1.5 withcolor darkabs dashed evenly;
+  drawarrow yi{dir        leave } .. yii -- yiii withpen pencircle scaled 1.5 withcolor darkabs dashed evenly;
+  draw envelope withpen pencircle scaled 1.5 withcolor darkabs;
 
-  draw edge((0, 0), (1.5u, -u), btex etex, 0.5darkgray + 0.5white);
-  draw edge((1.5u, u), (3u, 2u), btex etex, 0.5darkgray + 0.5white);
-  draw edge((3u, 0), (4.5u,  u), btex etex, darkgreen);
-  draw edge((3u, 0), (4.5u, -u), btex etex, darkblue);
+  draw edge((0, 0), (1.5u, -u), btex etex, 0.5darkcoa + 0.5white);
+  draw edge((1.5u, u), (3u, 2u), btex etex, 0.5darkcoa + 0.5white);
+  draw edge((3u, 0), (4.5u,  u), btex etex, darkcon);
+  draw edge((3u, 0), (4.5u, -u), btex etex, darkabs);
 
-  draw node((1.5u, -u), btex etex, 0.5darkgray + 0.5white, 0.5gray + 0.5white);
-  draw node((3u, 2u), btex etex, 0.5darkgray + 0.5white, 0.5gray + 0.5white);
-  draw node((4.5u,  u), btex etex, darkgray, gray);
-  draw node((4.5u, -u), btex etex, darkgray, gray);
+  draw node((1.5u, -u), btex etex, 0.5darkcoa + 0.5white, 0.5coa + 0.5white);
+  draw node((3u, 2u), btex etex, 0.5darkcoa + 0.5white, 0.5coa + 0.5white);
+  draw node((4.5u,  u), btex etex, darkcoa, coa);
+  draw node((4.5u, -u), btex etex, darkcoa, coa);
 
   draw siii;
 
-  label(btex \bf\tt\large $\text{s}_\text{3}$ etex, (  3u,  0)) withcolor 0.5darkgreen;
-  label(btex \bf\tt\large $\text{s}_\text{4}$ etex, (4.5u,  u)) withcolor 0.5darkgray;
-  label(btex \bf\tt\large $\text{s}_\text{5}$ etex, (4.5u, -u)) withcolor 0.5darkgray;
+  label(btex \tt\large $\text{s}_\text{3}$ etex, (  3u,  0)) withcolor 0.5darkcon;
+  label(btex \tt\large $\text{s}_\text{4}$ etex, (4.5u,  u)) withcolor 0.5darkcoa;
+  label(btex \tt\large $\text{s}_\text{5}$ etex, (4.5u, -u)) withcolor 0.5darkcoa;
 );
 
 tiv := image(
@@ -513,22 +525,22 @@ tiv := image(
 
   arc := yii {dir angle (1.5u, u)} .. {right}(4.5u, 0.25u){right}..{up}(4.5u + 0.75u, u){up} .. xii;
 
-  fill (xii {dir (180 + angle (1.5u, u))} .. envelope .. yii) -- arc -- cycle withcolor 0.5blue + 0.5white;
-  drawarrow xi{dir (180 + enter)} .. {dir angle (1.5u, u)} xii -- xiii withpen pencircle scaled 1.5 withcolor darkblue dashed evenly;
-  drawarrow yi{dir        leave } .. yii -- yiii withpen pencircle scaled 1.5 withcolor darkblue dashed evenly;
-  draw envelope withpen pencircle scaled 1.5 withcolor darkblue;
+  fill (xii {dir (180 + angle (1.5u, u))} .. envelope .. yii) -- arc -- cycle withcolor 0.5abs + 0.5white;
+  drawarrow xi{dir (180 + enter)} .. {dir angle (1.5u, u)} xii -- xiii withpen pencircle scaled 1.5 withcolor darkabs dashed evenly;
+  drawarrow yi{dir        leave } .. yii -- yiii withpen pencircle scaled 1.5 withcolor darkabs dashed evenly;
+  draw envelope withpen pencircle scaled 1.5 withcolor darkabs;
 
-  draw edge((0, 0), (1.5u, -u), btex etex, 0.5darkgray + 0.5white);
-  draw edge((1.5u, u), (3u, 2u), btex etex, 0.5darkgray + 0.5white);
-  draw edge((3u, 0), (4.5u, -u), btex etex, darkblue);
+  draw edge((0, 0), (1.5u, -u), btex etex, 0.5darkcoa + 0.5white);
+  draw edge((1.5u, u), (3u, 2u), btex etex, 0.5darkcoa + 0.5white);
+  draw edge((3u, 0), (4.5u, -u), btex etex, darkabs);
 
-  draw node((1.5u, -u), btex etex, 0.5darkgray + 0.5white, 0.5gray + 0.5white);
-  draw node((3u, 2u), btex etex, 0.5darkgray + 0.5white, 0.5gray + 0.5white);
-  draw node((4.5u, -u), btex etex, darkgray, gray);
+  draw node((1.5u, -u), btex etex, 0.5darkcoa + 0.5white, 0.5coa + 0.5white);
+  draw node((3u, 2u), btex etex, 0.5darkcoa + 0.5white, 0.5coa + 0.5white);
+  draw node((4.5u, -u), btex etex, darkcoa, coa);
 
   draw siv;
 
-  label(btex \bf\tt\large $\text{s}_\text{4}$ etex, (4.5u, u)) withcolor 0.5darkgreen;
+  label(btex \tt\large $\text{s}_\text{4}$ etex, (4.5u, u)) withcolor 0.5darkcon;
 );
 
 tv := image(
@@ -573,22 +585,23 @@ tv := image(
 
   arc := yii {dir angle (1.5u, u)} .. {right}(4.5u, 0.25u){right}..{up}(4.5u + 0.75u, u){up} .. xii;
 
-  fill (xii {dir (180 + angle (1.5u, u))} .. envelope .. yii) -- arc -- cycle withcolor 0.5blue + 0.5white;
-  drawarrow xi{dir (180 + enter)} .. {dir angle (1.5u, u)} xii -- xiii withpen pencircle scaled 1.5 withcolor darkblue dashed evenly;
-  drawarrow yi{dir        leave } .. yii -- yiii withpen pencircle scaled 1.5 withcolor darkblue dashed evenly;
-  draw envelope withpen pencircle scaled 1.5 withcolor darkblue;
+  fill (xii {dir (180 + angle (1.5u, u))} .. envelope .. yii) -- arc -- cycle withcolor 0.5abs + 0.5white;
+  drawarrow xi{dir (180 + enter)} .. {dir angle (1.5u, u)} xii -- xiii withpen pencircle scaled 1.5 withcolor darkabs dashed evenly;
+  drawarrow yi{dir        leave } .. yii -- yiii withpen pencircle scaled 1.5 withcolor darkabs dashed evenly;
+  draw envelope withpen pencircle scaled 1.5 withcolor darkabs;
 
-  draw edge((0, 0), (1.5u, -u), btex etex, 0.5darkgray + 0.5white);
-  draw edge((1.5u, u), (3u, 2u), btex etex, 0.5darkgray + 0.5white);
-  draw edge((3u, 0), (4.5u, -u), btex etex, darkblue);
+  draw edge((0, 0), (1.5u, -u), btex etex, 0.5darkcoa + 0.5white);
+  draw edge((1.5u, u), (3u, 2u), btex etex, 0.5darkcoa + 0.5white);
+  draw edge((3u, 0), (4.5u, -u), btex etex, darkabs);
 
-  draw node((1.5u, -u), btex etex, 0.5darkgray + 0.5white, 0.5gray + 0.5white);
-  draw node((3u, 2u), btex etex, 0.5darkgray + 0.5white, 0.5gray + 0.5white);
-  draw node((4.5u, -u), btex etex, darkgray, gray);
+  draw node((1.5u, -u), btex etex, 0.5darkcoa + 0.5white, 0.5coa + 0.5white);
+  draw node((3u, 2u), btex etex, 0.5darkcoa + 0.5white, 0.5coa + 0.5white);
+  draw node((4.5u, -u), btex etex, darkcoa, coa);
 
   draw sv;
 
-  label(btex \bf\tt\large $\text{s}_\text{2}$ etex, (1.5u, u)) withcolor 0.5darkgreen;
+  label(btex \tt\large $\text{s}_\text{2}$ etex, (1.5u, u)) withcolor 0.5darkcon;
+  label(btex \tt\large $\text{s}_\text{3}'$ etex, (3u, 0)) withcolor 0.25darkcon + 0.5white;
 );
 
 tvi := image(
@@ -633,22 +646,23 @@ tvi := image(
 
   arc := yii {dir angle (1.5u, u)} .. {right}(4.5u, 0.25u){right}..{up}(4.5u + 0.75u, u){up} .. xii;
 
-  fill (xii {dir (180 + angle (1.5u, u))} .. envelope .. yii) -- arc -- cycle withcolor 0.5blue + 0.5white;
-  drawarrow xi{dir (180 + enter)} .. {dir angle (1.5u, u)} xii -- xiii withpen pencircle scaled 1.5 withcolor darkblue dashed evenly;
-  drawarrow yi{dir        leave } .. yii -- yiii withpen pencircle scaled 1.5 withcolor darkblue dashed evenly;
-  draw envelope withpen pencircle scaled 1.5 withcolor darkblue;
+  fill (xii {dir (180 + angle (1.5u, u))} .. envelope .. yii) -- arc -- cycle withcolor 0.5abs + 0.5white;
+  drawarrow xi{dir (180 + enter)} .. {dir angle (1.5u, u)} xii -- xiii withpen pencircle scaled 1.5 withcolor darkabs dashed evenly;
+  drawarrow yi{dir        leave } .. yii -- yiii withpen pencircle scaled 1.5 withcolor darkabs dashed evenly;
+  draw envelope withpen pencircle scaled 1.5 withcolor darkabs;
 
-  draw edge((0, 0), (1.5u, -u), btex etex, 0.5darkgray + 0.5white);
-  draw edge((1.5u, u), (3u, 2u), btex etex, 0.5darkgray + 0.5white);
-  draw edge((3u, 0), (4.5u, -u), btex etex, darkblue);
+  draw edge((0, 0), (1.5u, -u), btex etex, 0.5darkcoa + 0.5white);
+  draw edge((1.5u, u), (3u, 2u), btex etex, 0.5darkcoa + 0.5white);
+  draw edge((3u, 0), (4.5u, -u), btex etex, darkabs);
 
-  draw node((1.5u, -u), btex etex, 0.5darkgray + 0.5white, 0.5gray + 0.5white);
-  draw node((3u, 2u), btex etex, 0.5darkgray + 0.5white, 0.5gray + 0.5white);
-  draw node((4.5u, -u), btex etex, darkgray, gray);
+  draw node((1.5u, -u), btex etex, 0.5darkcoa + 0.5white, 0.5coa + 0.5white);
+  draw node((3u, 2u), btex etex, 0.5darkcoa + 0.5white, 0.5coa + 0.5white);
+  draw node((4.5u, -u), btex etex, darkcoa, coa);
 
   draw svi;
 
-  label(btex \bf\tt\large $\text{s}_\text{3}'$ etex, (3u, 0)) withcolor 0.5darkgreen;
+  label(btex \tt\large $\text{s}_\text{3}'$ etex, (3u, 0)) withcolor 0.5darkcon;
+  label(btex \tt\large $\text{s}_\text{5}$ etex, (4.5u, -u)) withcolor 0.5darkcoa;
 );
 
 tvii := image(
@@ -693,22 +707,22 @@ tvii := image(
 
   arc := yii {dir 60} .. {dir 110} xii;
 
-  fill (xii {dir (180 + angle (1.5u, u))} .. envelope .. yii) -- arc -- cycle withcolor 0.5blue + 0.5white;
-  drawarrow xi{dir (180 + enter)} .. {dir angle (1.5u, u)} xii -- xiii withpen pencircle scaled 1.5 withcolor darkblue dashed evenly;
-  drawarrow yi{dir        leave } .. yii -- yiii withpen pencircle scaled 1.5 withcolor darkblue dashed evenly;
-  draw envelope withpen pencircle scaled 1.5 withcolor darkblue;
+  fill (xii {dir (180 + angle (1.5u, u))} .. envelope .. yii) -- arc -- cycle withcolor 0.5abs + 0.5white;
+  drawarrow xi{dir (180 + enter)} .. {dir angle (1.5u, u)} xii -- xiii withpen pencircle scaled 1.5 withcolor darkabs dashed evenly;
+  drawarrow yi{dir        leave } .. yii -- yiii withpen pencircle scaled 1.5 withcolor darkabs dashed evenly;
+  draw envelope withpen pencircle scaled 1.5 withcolor darkabs;
 
-  draw edge((0, 0), (1.5u, -u), btex etex, 0.5darkgray + 0.5white);
-  draw edge((1.5u, u), (3u, 2u), btex etex, 0.5darkgray + 0.5white);
-  draw edge((3u, 0), (4.5u, -u), btex etex, darkgreen);
+  draw edge((0, 0), (1.5u, -u), btex etex, 0.5darkcoa + 0.5white);
+  draw edge((1.5u, u), (3u, 2u), btex etex, 0.5darkcoa + 0.5white);
+  draw edge((3u, 0), (4.5u, -u), btex etex, darkcon);
 
-  draw node((1.5u, -u), btex etex, 0.5darkgray + 0.5white, 0.5gray + 0.5white);
-  draw node((3u, 2u), btex etex, 0.5darkgray + 0.5white, 0.5gray + 0.5white);
-  draw node((4.5u, -u), btex etex, darkgreen, green);
+  draw node((1.5u, -u), btex etex, 0.5darkcoa + 0.5white, 0.5coa + 0.5white);
+  draw node((3u, 2u), btex etex, 0.5darkcoa + 0.5white, 0.5coa + 0.5white);
+  draw node((4.5u, -u), btex etex, darkcon, con);
 
   draw svii;
 
-  label(btex \bf\tt\large $\text{s}_\text{5}$ etex, (4.5u, -u)) withcolor 0.5darkgreen;
+  label(btex \tt\large $\text{s}_\text{5}$ etex, (4.5u, -u)) withcolor 0.5darkcon;
 );
 
 t := image(
