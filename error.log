@@ -1,0 +1,122 @@
+  1: [<clinit>:3]:   ref(object(188)) = 188 and ref(object(189))
+  2: [main:0]:       ssa_1_frame_1_args = array(187)
+  3: [main:4]:       alength(arrlen, array(356)) = 5
+  4: [main:4]:       ref(array(356)) = 356
+  5: [main:5]:       ssa_1_frame_1_cfg = array(356)
+  6: [main:8]:       alength(arrlen, array(357)) = 1
+  7: [main:8]:       ref(array(357)) = 357
+  8: [main:9]:       ssa_1_frame_1_succ = array(357)
+  9: [main:13]:      ssa_1_arr = awrite(ssa_0_arr, ssa_1_frame_1
+ 10: [main:18]:      ref(object(380)) = 380 and fread(ssa_0_fact
+ 11: [<init>:0]:     ssa_1_frame_2_this = object(380) and ssa_1_
+ 12: [<init>:0]:     ssa_1_frame_3_local_0 = ssa_1_frame_2_this
+ 13: [<init>:1]:     true
+ 14: [<init>:4]:     true
+ 15: [<init>:8]:     alength(arrlen, array(381)) = 1
+ 16: [<init>:8]:     ref(array(381)) = 381
+ 17: [<init>:11]:    ssa_1_facts = fwrite(ssa_0_facts, ssa_1_fra
+ 18: [@1unknownInt:0@]: true
+ 19: [@1unknownInt:2@]: ssa_1_frame_4_return = ssa_0_frame_4_unknow
+ 20: [<init>:19]:    ssa_1_frame_2_return_pc9 = ssa_1_frame_4_re
+ 21: [<init>:20]:    ssa_2_arr = awrite(ssa_1_arr, fread(ssa_1_f
+ 22: [<init>:25]:    ssa_1_successors = fwrite(ssa_0_successors,
+ 23: [<init>:26]:    true
+ 24: [main:23]:      true
+ 25: [main:24]:      ssa_3_arr = awrite(ssa_2_arr, ssa_1_frame_1
+ 26: [main:27]:      alength(arrlen, array(385)) = 2
+ 27: [main:27]:      ref(array(385)) = 385
+ 28: [main:28]:      ssa_2_frame_1_succ = array(385)
+ 29: [main:32]:      ssa_4_arr = awrite(ssa_3_arr, ssa_2_frame_1
+ 30: [main:36]:      ssa_5_arr = awrite(ssa_4_arr, ssa_2_frame_1
+ 31: [main:41]:      ref(object(386)) = 386 and fread(ssa_1_fact
+ 32: [<init>:0]:     ssa_1_frame_5_this = object(386) and ssa_1_
+ 33: [<init>:0]:     ssa_1_frame_6_local_0 = ssa_1_frame_5_this
+ 34: [<init>:1]:     true
+ 35: [<init>:4]:     true
+ 36: [<init>:8]:     alength(arrlen, array(387)) = 1
+ 37: [<init>:8]:     ref(array(387)) = 387
+ 38: [<init>:11]:    ssa_2_facts = fwrite(ssa_1_facts, ssa_1_fra
+ 39: [unknownInt:0]: true
+ 40: [unknownInt:2]: ssa_1_frame_7_return = ssa_0_frame_7_unknow
+ 41: [<init>:19]:    ssa_1_frame_5_return_pc9 = ssa_1_frame_7_re
+ 42: [<init>:20]:    ssa_6_arr = awrite(ssa_5_arr, fread(ssa_2_f
+ 43: [<init>:25]:    ssa_2_successors = fwrite(ssa_1_successors,
+ 44: [<init>:26]:    true
+ 45: [main:46]:      true
+ 46: [main:47]:      ssa_7_arr = awrite(ssa_6_arr, ssa_1_frame_1
+ 47: [main:50]:      alength(arrlen, array(388)) = 1
+ 48: [main:50]:      ref(array(388)) = 388
+ 49: [main:51]:      ssa_3_frame_1_succ = array(388)
+ 50: [main:55]:      ssa_8_arr = awrite(ssa_7_arr, ssa_3_frame_1
+ 51: [main:60]:      ref(object(389)) = 389 and fread(ssa_2_fact
+ 52: [<init>:0]:     ssa_1_frame_8_this = object(389) and ssa_1_
+ 53: [<init>:0]:     ssa_1_frame_9_local_0 = ssa_1_frame_8_this
+ 54: [<init>:1]:     true
+ 55: [<init>:4]:     true
+ 56: [<init>:8]:     alength(arrlen, array(390)) = 1
+ 57: [<init>:8]:     ref(array(390)) = 390
+ 58: [<init>:11]:    ssa_3_facts = fwrite(ssa_2_facts, ssa_1_fra
+ 59: [unknownInt:0]: true
+ 60: [unknownInt:2]: ssa_1_frame_10_return = ssa_0_frame_10_unkn
+ 61: [<init>:19]:    ssa_1_frame_8_return_pc9 = ssa_1_frame_10_r
+ 62: [<init>:20]:    ssa_9_arr = awrite(ssa_8_arr, fread(ssa_3_f
+ 63: [<init>:25]:    ssa_3_successors = fwrite(ssa_2_successors,
+ 64: [<init>:26]:    true
+ 65: [main:65]:      true
+ 66: [main:66]:      ssa_10_arr = awrite(ssa_9_arr, ssa_1_frame_
+ 67: [main:69]:      alength(arrlen, array(391)) = 1
+ 68: [main:69]:      ref(array(391)) = 391
+ 69: [main:70]:      ssa_4_frame_1_succ = array(391)
+ 70: [main:74]:      ssa_11_arr = awrite(ssa_10_arr, ssa_4_frame
+ 71: [main:79]:      ref(object(392)) = 392 and fread(ssa_3_fact
+ 72: [<init>:0]:     ssa_1_frame_11_this = object(392) and ssa_1
+ 73: [<init>:0]:     ssa_1_frame_12_local_0 = ssa_1_frame_11_thi
+ 74: [<init>:1]:     true
+ 75: [<init>:4]:     true
+ 76: [<init>:8]:     alength(arrlen, array(393)) = 1
+ 77: [<init>:8]:     ref(array(393)) = 393
+ 78: [<init>:11]:    ssa_4_facts = fwrite(ssa_3_facts, ssa_1_fra
+ 79: [unknownInt:0]: true
+ 80: [unknownInt:2]: ssa_1_frame_13_return = ssa_0_frame_13_unkn
+ 81: [<init>:19]:    ssa_1_frame_11_return_pc9 = ssa_1_frame_13_
+ 82: [<init>:20]:    ssa_12_arr = awrite(ssa_11_arr, fread(ssa_4
+ 83: [<init>:25]:    ssa_4_successors = fwrite(ssa_3_successors,
+ 84: [<init>:26]:    true
+ 85: [main:84]:      true
+ 86: [main:85]:      ssa_13_arr = awrite(ssa_12_arr, ssa_1_frame
+ 87: [main:88]:      alength(arrlen, array(394)) = 0
+ 88: [main:88]:      ref(array(394)) = 394
+ 89: [main:89]:      ssa_5_frame_1_succ = array(394)
+ 90: [main:94]:      ref(object(395)) = 395 and fread(ssa_4_fact
+ 91: [<init>:0]:     ssa_1_frame_14_this = object(395) and ssa_1
+ 92: [<init>:0]:     ssa_1_frame_15_local_0 = ssa_1_frame_14_thi
+ 93: [<init>:1]:     true
+ 94: [<init>:4]:     true
+ 95: [<init>:8]:     alength(arrlen, array(396)) = 1
+ 96: [<init>:8]:     ref(array(396)) = 396
+ 97: [<init>:11]:    ssa_5_facts = fwrite(ssa_4_facts, ssa_1_fra
+ 98: [unknownInt:0]: true
+ 99: [unknownInt:2]: ssa_1_frame_16_return = ssa_0_frame_16_unkn
+100: [<init>:19]:    ssa_1_frame_14_return_pc9 = ssa_1_frame_16_
+101: [<init>:20]:    ssa_14_arr = awrite(ssa_13_arr, fread(ssa_5
+102: [<init>:25]:    ssa_5_successors = fwrite(ssa_4_successors,
+103: [<init>:26]:    true
+104: [main:99]:      true
+105: [main:100]:     ssa_15_arr = awrite(ssa_14_arr, ssa_1_frame
+106: [main:104]:     alength(arrlen, array(397)) = 26
+107: [main:104]:     ref(array(397)) = 397
+108: [main:106]:     ssa_1_frame_1_queue = array(397)
+109: [main:108]:     ssa_1_frame_1_i = 0
+110: [main:113]:     ssa_1_frame_1_j = (ssa_1_frame_1_i + 1)
+111: [main:118]:     ssa_16_arr = awrite(ssa_15_arr, ssa_1_frame
+112: [main:121]:     ssa_1_frame_1_oldFacts = null
+113: [main:124]:     ssa_1_frame_1_newFacts = null
+114: [main:130]:     not(ssa_1_frame_1_i = ssa_1_frame_1_j)
+115: [main:134]:     ssa_1_frame_1_i = 0
+116: [main:136]:     ssa_1_frame_1_cfnodeID = aread(ssa_16_arr, 
+117: [main:140]:     ssa_2_frame_1_i = (ssa_1_frame_1_i + 1)
+118: [main:149]:     ssa_2_frame_1_i < alength(arrlen, ssa_1_fra
+119: [main:149]:     ssa_2_frame_1_i < alength(arrlen, ssa_1_fra
+120: [main:153]:     ssa_1_frame_1_cfnodeID = 0
+121: [main:158]:     ssa_2_frame_1_oldFacts = fread(ssa_5_facts,
+122: [main:161]:     alength(arrlen, ssa_2_frame_1_oldFacts) < 0

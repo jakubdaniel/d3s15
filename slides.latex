@@ -84,6 +84,7 @@
               \item predicate data abstraction
               \item object aliasing
             \end{itemize}
+          \item state matching
         \end{itemize}
     \end{itemize}
   \end{frame}
@@ -199,8 +200,8 @@
                 \only<1>{$\text{e}(\widehat{\text{s}}_\text{1}, \widehat{\text{u}}_\text{1})$}%
                 \only<2>{$\text{e}(\widehat{\text{s}}_\text{2}, \widehat{\text{u}}_\text{2})$}%
               }%
-              \only<3>{%
-                {$\exists M\,.\,M \models$ }%
+              \only<3,4>{%
+                \visible<3>{$\exists M$.}{$M \models$ }%
                 $\varphi_\text{3}$%
                 { $\wedge$ }%
                 $\text{e}(\widehat{\text{s}}_\text{3}, \widehat{\text{s}}_\text{5})$%
@@ -210,7 +211,10 @@
           \only<5,7>{
             \begin{column}{\textwidth}
               \only<5>{%
-                \strut{}Suppose {\tt$\varphi_\text{3} \wedge \text{e}(\widehat{\text{s}}_\text{3}, \widehat{\text{s}}_\text{5})$} permits interpretation of {\tt$\text{e}(\widehat{\text{s}}_\text{2}, \widehat{\text{s}}_\text{3})$} yielding {\tt$\text{s}_\text{3}'$}%
+                \strut{}Suppose
+                %{\tt$\varphi_\text{3} \wedge \text{e}(\widehat{\text{s}}_\text{3}, \widehat{\text{s}}_\text{5})$}
+                $M$
+                permits interpretation of {\tt$\text{e}(\widehat{\text{s}}_\text{2}, \widehat{\text{s}}_\text{3})$} yielding {\tt$\text{s}_\text{3}'$}%
               }%
               \only<7>{%
                 \strut{}Entire state space explored%
@@ -226,6 +230,7 @@
     \begin{itemize}
       \item \emph{Dynamic Pruning and Discovery of Feasible Covering Paths}
       \item data non-determinism
+      \item feasible traces mostly
     \end{itemize}
   \end{frame}
 
@@ -236,8 +241,14 @@
           \item scheduling
           \item \ldots
         \end{itemize}
-      \item Nested interpolants
+      \item some traces infeasible anyway
+      \item \emph{Nested Interpolants}
     \end{itemize}
+  \end{frame}
+
+  \begin{frame}{Spurious Error Trace}
+    \lstinputlisting[language=Java,basicstyle=\scriptsize\tt,breaklines=false,linerange={1-20}]{error.log}
+    \hbox to \hsize{\hfill\ldots\hfill}
   \end{frame}
 
   \begin{frame}{{P\large{}ANDA} Algorithm}
@@ -305,7 +316,7 @@
     }
   \end{frame}
 
-  \begin{frame}{Evaluation}
+  \begin{frame}{ATVA'15 Submission - Evaluation}
     \def\fst{\cellcolor{orange}}
     \def\avg{\cellcolor{orange!30}}
     \begin{center}
@@ -335,15 +346,15 @@
   \end{frame}
 
   \begin{frame}{Example Program}
-    \scalebox{0.75}{
-      \lstinputlisting[language=Java,linerange={3-19}]{ArrayMin.java}
-    }
-    \vskip-2cm
-    \hbox to \hsize{\hfill
-      \scalebox{0.45}{
-        \lstinputlisting[linerange={1-9}]{ArrayMin.jpf}
-      }
-    }
+    \lstinputlisting[basicstyle=\scriptsize\tt,language=Java,linerange={3-19}]{ArrayMin.java}
+    \strut%
+  \end{frame}
+
+  \begin{frame}{Example Program}
+    \lstinputlisting[basicstyle=\scriptsize\tt,language=Java]{ArrayMinStepByStep.java}
+    \strut%
+    \only<1>{\hbox to \hsize{\hfill{\scriptsize\color{darkblue}\tt\bfseries{SIZE = 1, array.length = SIZE, j = 0, j = 1}}\hfill}}%
+    \only<12>{\hbox to \hsize{\hfill{\color{darkgreen}\bfseries{Program Safe}}\hfill}}%
   \end{frame}
 
   \subtitleframe{{\Huge{}P\huge{}ANDA} \\\vskip0.5em {\small\color{darkgray}\url{https://github.com/d3sformal/panda}} \small\\ {\scriptsize{}based on \color{darkgray}\url{http://babelfish.arc.nasa.gov/trac/jpf}}}

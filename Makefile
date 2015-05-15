@@ -8,7 +8,7 @@ CLASSPATH=.:$(PANDA)/build/classes
 
 all: slides.pdf
 
-slides.pdf: %.pdf: %.latex %.mp beamerthemeD3S.sty algorithm.tex ArrayMin.java
+slides.pdf: %.pdf: %.latex %.mp beamerthemeD3S.sty algorithm.tex ArrayMin.java ArrayMinStepByStep.java error.log
 	@mpost $*.mp
 	@pdflatex $*.latex
 	@pdflatex $*.latex
