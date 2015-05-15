@@ -6,6 +6,7 @@
 \usepackage{colortbl}
 \usepackage{multirow}
 \usepackage{pifont}
+\usepackage{listings}
 
 \input algorithm
 
@@ -246,6 +247,7 @@
               }
               \MyReturn{\hbox{\it safe}}
           }
+          \MyVoidLine{}
           \MyFunction{refine}{P, abs, cex}{
               \MyAssign{({\cal C}, l_{init}, l_{err})}{P}
               \MyFor{\varphi_{scp} \in scopes(\varphi_{cex})}{
@@ -259,7 +261,6 @@
               }
               \MyReturn{abs}
           }
-          \MyVoidLine{}
         }{
           \MyFunction{unroll}{P, R, tr}{
               \MyAssign{({\cal C}, l_{init}, l_{err})}{P}
@@ -303,31 +304,34 @@
         %\cline{2-5}
         \multicolumn{1}{ c ||}{}                             & \multicolumn{1}{ c }{ $t$ } & \multicolumn{1}{ c }{ $|S|$ } & \multicolumn{1}{ c }{ $|abs|$ } & \multicolumn{1}{ c }{ \#sat } & & & & \\
         \hline
-        Array              &        3 s &  29 &  7 &  1809 &             7 s &             2 s &             1 s &             1 s \\
-        %\hline
-        Eureka 01          & \fst  25 s & 741 & 53 & 11462 & \fst \crossmark & \fst \crossmark & \fst \crossmark & \fst    timeout \\
-        %\hline
-        TREX 03            &        8 s &  53 &  6 &  1885 &      \crossmark &      \crossmark &             1 s &             1 s \\
-        %\hline
-        Invert string      & \avg   6 s & 126 & 18 &  3103 & \avg \crossmark & \avg        6 s & \avg \crossmark & \avg       13 s \\
-        %\hline
-        Password           &        4 s & 130 & 19 &  2211 &            60 s &             3 s &      \crossmark &             5 s \\
-        %\hline
-        Reverse array      & \avg   3 s & 113 & 17 &  2049 & \avg \crossmark & \avg        3 s & \avg \crossmark & \avg        3 s \\
-        %\hline
-        Two indices        &        2 s &  33 & 15 &  1777 &      \crossmark &             2 s &      \crossmark &             1 s \\
-        %\hline
-        Data-flow analysis & \fst 117 s & 358 & 63 &  8458 & \fst \crossmark & \fst \crossmark & \fst \crossmark & \fst \crossmark \\
-        %\hline
-        Cycling race       &        4 s &  87 & 28 &  2283 &             5 s &             3 s &             2 s &             3 s \\
-        %\hline
-        Image rendering    &      260 s & 664 & 13 &  6235 &             1 s &            46 s &      \crossmark &      \crossmark \\
-        %\hline
-        Scheduler          & \avg   4 s &  59 & 27 &  2115 & \avg       26 s & \avg        4 s & \avg \crossmark & \avg        5 s \\
-        %\hline
+        Array                        &        3 s &  29 &  7 &  1809 &             7 s &             2 s &             1 s &             1 s \\
+        Eureka 01                    & \fst  25 s & 741 & 53 & 11462 & \fst \crossmark & \fst \crossmark & \fst \crossmark & \fst    timeout \\
+        TREX 03                      &        8 s &  53 &  6 &  1885 &      \crossmark &      \crossmark &             1 s &             1 s \\
+        Invert string                & \avg   6 s & 126 & 18 &  3103 & \avg \crossmark & \avg        6 s & \avg \crossmark & \avg       13 s \\
+        Password                     &        4 s & 130 & 19 &  2211 &            60 s &             3 s &      \crossmark &             5 s \\
+        Reverse array                & \avg   3 s & 113 & 17 &  2049 & \avg \crossmark & \avg        3 s & \avg \crossmark & \avg        3 s \\
+        Two indices                  &        2 s &  33 & 15 &  1777 &      \crossmark &             2 s &      \crossmark &             1 s \\
+        Data-flow analysis${}^\star$ & \fst 117 s & 358 & 63 &  8458 & \fst \crossmark & \fst \crossmark & \fst \crossmark & \fst \crossmark \\
+        Cycling race${}^\star$       &        4 s &  87 & 28 &  2283 &             5 s &             3 s &             2 s &             3 s \\
+        Image rendering${}^\star$    &      260 s & 664 & 13 &  6235 &             1 s &            46 s &      \crossmark &      \crossmark \\
+        Scheduler${}^\star$          & \avg   4 s &  59 & 27 &  2115 & \avg       26 s & \avg        4 s & \avg \crossmark & \avg        5 s \\
         \end{tabular}
       }
+      \vskip2em
+      {\tiny\sf SVCOMP'14 and our examples (${}^\star$)}
     \end{center}
+  \end{frame}
+
+  \begin{frame}{Example Program}
+    \scalebox{0.75}{
+      \lstinputlisting[language=Java,linerange={3-19}]{ArrayMinEnv.java}
+    }
+    \vskip-2cm
+    \hbox to \hsize{\hfill
+      \scalebox{0.45}{
+        \lstinputlisting[linerange={1-9}]{ArrayMin.jpf}
+      }
+    }
   \end{frame}
 
   \subtitleframe{{\Huge{}P\huge{}ANDA} \\\vskip0.5em {\small\color{darkgray}\url{https://github.com/d3sformal/panda}} \small\\ {\scriptsize{}based on \color{darkgray}\url{http://babelfish.arc.nasa.gov/trac/jpf}}}

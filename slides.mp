@@ -653,7 +653,7 @@ tvi := image(
 
   draw edge((0, 0), (1.5u, -u), btex etex, 0.5darkcoa + 0.5white);
   draw edge((1.5u, u), (3u, 2u), btex etex, 0.5darkcoa + 0.5white);
-  draw edge((3u, 0), (4.5u, -u), btex etex, darkabs);
+  draw edge((3u, 0), (4.5u, -u), btex etex, darkcon);
 
   draw node((1.5u, -u), btex etex, 0.5darkcoa + 0.5white, 0.5coa + 0.5white);
   draw node((3u, 2u), btex etex, 0.5darkcoa + 0.5white, 0.5coa + 0.5white);
