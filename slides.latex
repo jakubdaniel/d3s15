@@ -113,7 +113,7 @@
         \begin{itemize}
           \item all feasible traces
           \item some infeasible traces
-          \item cone of concrete traces to be considered % unlike BMC, symbolic execution, concolic testing
+          \item cone of concrete traces % to be considered % unlike BMC, symbolic execution, concolic testing
         \end{itemize}
       \end{column}
       \begin{column}{0.45\textwidth}
@@ -224,14 +224,18 @@
 
   \begin{frame}{Combined State Space Traversal}
     \begin{itemize}
-      \item we call it \emph{Pruning}
-      \item
+      \item \emph{Dynamic Pruning and Discovery of Feasible Covering Paths}
+      \item data non-determinism
     \end{itemize}
   \end{frame}
 
   \begin{frame}{Refinement}
     \begin{itemize}
-      \item 
+      \item Non-determinism in concrete state space traversal
+        \begin{itemize}
+          \item scheduling
+          \item \ldots
+        \end{itemize}
       \item Nested interpolants
     \end{itemize}
   \end{frame}
