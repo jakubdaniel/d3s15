@@ -1,5 +1,5 @@
-PANDA=../../projects/panda
-PRESENTATION=../../slides/d3s15
+PANDA=/home/jakub/d3s/projects/panda
+PRESENTATION=/home/jakub/d3s/slides/d3s15
 JAVA=/opt/oracle-jdk-bin-1.7.0.76
 
 CFLAGS=-I$(JAVA)/include -I$(JAVA)/include/linux -fPIC
@@ -8,7 +8,7 @@ CLASSPATH=.:$(PANDA)/build/classes
 
 all: slides.pdf
 
-slides.pdf: %.pdf: %.latex %.mp beamerthemeD3S.sty algorithm.tex ArrayMinEnv.java
+slides.pdf: %.pdf: %.latex %.mp beamerthemeD3S.sty algorithm.tex ArrayMin.java
 	@mpost $*.mp
 	@pdflatex $*.latex
 	@pdflatex $*.latex
@@ -24,11 +24,11 @@ check: ArrayMin.jpf ArrayMinEnv.class
 
 ### The following allows to run the example alone and in Panda
 
-ArrayMin: ArrayMinEnv.class arraymin
+ArrayMin: ArrayMinEnv.class ArrayMin.class arraymin
 	@java -ea -cp $(CLASSPATH) ArrayMinEnv
 
-ArrayMinEnv.class: %.class: %.java gov_nasa_jpf_abstraction_Verifier.h gov_nasa_jpf_abstraction_Verifier.c
-	@javac -cp $(CLASSPATH) ArrayMinEnv.java
+%.class: %.java
+	@javac -g -cp $(CLASSPATH) $<
 
 gov_nasa_jpf_abstraction_Verifier.h:
 	@javah -stubs -cp $(CLASSPATH) gov.nasa.jpf.abstraction.Verifier

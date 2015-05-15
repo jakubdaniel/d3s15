@@ -222,8 +222,16 @@
     \end{frame}
   }
 
+  \begin{frame}{Combined State Space Traversal}
+    \begin{itemize}
+      \item we call it \emph{Pruning}
+      \item
+    \end{itemize}
+  \end{frame}
+
   \begin{frame}{Refinement}
     \begin{itemize}
+      \item 
       \item Nested interpolants
     \end{itemize}
   \end{frame}
@@ -324,7 +332,7 @@
 
   \begin{frame}{Example Program}
     \scalebox{0.75}{
-      \lstinputlisting[language=Java,linerange={3-19}]{ArrayMinEnv.java}
+      \lstinputlisting[language=Java,linerange={3-19}]{ArrayMin.java}
     }
     \vskip-2cm
     \hbox to \hsize{\hfill
