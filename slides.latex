@@ -28,10 +28,21 @@
   \titleframe
 
   \begin{frame}{Deciding Program Safety}
-    \begin{itemize}
-      \item unreachability of error states
-      \item generally undecidable
-    \end{itemize}
+        \begin{itemize}
+          \item unreachability of error states
+            \begin{itemize}
+              \item assertion violation
+              \item null dereference
+              \item access to array index out of bounds
+            \end{itemize}
+          \item generally undecidable
+            \begin{itemize}
+              \item \scriptsize\emph{{\tt{assert}}-free {\tt{P}} terminates iff {\tt\{P; assert false;\}} violates assertion}
+              \item infinite data domains, unbounded heap, recursion
+              \item soundness guarantees
+              \item spurious errors and/or termination not guaranteed
+            \end{itemize}
+        \end{itemize}
   \end{frame}
 
   \begin{frame}{Deciding Program Safety - Facts}
