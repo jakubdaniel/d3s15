@@ -37,8 +37,11 @@
             \end{itemize}
           \item generally undecidable
             \begin{itemize}
-              \item \scriptsize\emph{{\tt{assert}}-free {\tt{P}} terminates iff {\tt\{P; assert false;\}} violates assertion}
+              \item {\scriptsize\emph{{\tt{assert}}-free {\tt{P}} terminates iff {\tt\{P; assert false\}} violates assertion}}
               \item infinite data domains, unbounded heap, recursion
+            \end{itemize}
+          \item trade-off
+            \begin{itemize}
               \item soundness guarantees
               \item spurious errors and/or termination not guaranteed
             \end{itemize}
@@ -82,7 +85,7 @@
 
   \begin{frame}{Deciding Program Safety - The {P\large{}ANDA} Way}
     \begin{itemize}
-      \item dynamic analysis % opposed to static
+      \item dynamic analysis-driven % opposed to static
         \begin{itemize}
           \item depth first search from initial state
           \item concrete
@@ -379,7 +382,7 @@
   \begin{frame}{Example Program}
     \lstinputlisting[basicstyle=\scriptsize\tt,language=Java]{ArrayMinStepByStep.java}
     \strut%
-    \only<1-11>{\hbox to \hsize{\hfill{\scriptsize\color{darkblue}\tt\bfseries{SIZE = 1, array.length = SIZE, \only<2,8->{\bgroup\color{gray}}j = 0\only<2,8->{\egroup}, \only<2-7>{\bgroup\color{gray}}j = 1\only<2-7>{\egroup}}}\hfill}}%
+    \only<1-11>{\hbox to \hsize{\hfill{\scriptsize\color{darkblue}\tt\bfseries{SIZE = 1, array.length = SIZE, \only<2>{\bgroup\color{gray}}\only<7,11>{\bgroup\color{darkred}}j = 0\only<7,11>{\egroup}\only<2>{\egroup}, \btHL<7,11>{\only<2-6,8-9>{\bgroup\color{gray}}\only<7,11>{\bgroup\color{darkred}}array[0] < min\only<7,11>{\egroup}\only<2-6,8-9>{\egroup}}}}\hfill}}%
     \only<12>{\hbox to \hsize{\hfill{\color{darkgreen}\bfseries{Program Safe}}\hfill}}%
   \end{frame}
 
