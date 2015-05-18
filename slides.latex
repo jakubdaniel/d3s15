@@ -34,7 +34,7 @@
     \end{itemize}
   \end{frame}
 
-  \begin{frame}{Deciding Program Safety - Sad Facts}
+  \begin{frame}{Deciding Program Safety - Facts}
     \begin{center}
       \def\p{\color{darkgreen}}
       \def\c{\color{darkred}}
@@ -48,16 +48,16 @@
       \vbox{
           {\bf All sorts of combinations} \\
           over+under approx. predicate abstraction \\
-          tests+predicate abstraction \cite{tests} \\
-          concolic testing \cite{concolic} \\
+          tests+predicate abstraction [DASH] \\%\cite{tests} \\
+          concolic testing [DART] \\%\cite{concolic} \\
           \ldots
       }
     \end{center}
-    \tiny
-    \begin{thebibliography}{9}
-      \bibitem{tests} DASH
-      \bibitem{concolic} DART
-    \end{thebibliography}
+    %\tiny
+    %\begin{thebibliography}{9}
+    %  \bibitem{tests} DASH
+    %  \bibitem{concolic} DART
+    %\end{thebibliography}
   \end{frame}
 
   \begin{frame}{Deciding Program Safety - Trends}
@@ -236,9 +236,10 @@
 
   \begin{frame}{Refinement}
     \begin{itemize}
-      \item Non-determinism in concrete state space traversal
+      \item non-determinism in concrete state space traversal
         \begin{itemize}
           \item scheduling
+          \item heap abstraction
           \item \ldots
         \end{itemize}
       \item some traces infeasible anyway
@@ -247,8 +248,51 @@
   \end{frame}
 
   \begin{frame}{Spurious Error Trace}
-    \lstinputlisting[language=Java,basicstyle=\scriptsize\tt,breaklines=false,linerange={1-20}]{error.log}
+    \lstinputlisting[{language=Java,basicstyle=\scriptsize\tt,breaklines=false,linerange={1-17},keywords=[3]{}}]{error.log}
     \hbox to \hsize{\hfill\ldots\hfill}
+    \lstinputlisting[{language=Java,basicstyle=\scriptsize\tt,breaklines=false,linerange={25-25},keywords=[3]{}}]{error.log}
+    \hbox to \hsize{\hfill\ldots\hfill}
+  \end{frame}
+
+  \begin{frame}{Nested Interpolants}
+    {}
+    \begin{itemize}
+      \item encode trace formula
+        {\tt\scriptsize
+          \begin{center}
+            \begin{columns}
+              \begin{column}{0.4\textwidth}
+              \vskip1ex
+              \hbox{\vbox{
+                \text{\large\color{darkorange}\bfseries(} \\
+                \ \ \ \text{\btHL<2>{$\text{o}_\text{380}.\text{facts} = \text{null}$}} \\
+                \ \ \ \text{\large\color{darkblue}\bfseries(} \\
+                \ \ \ \ \ \ \text{\btHL<2>{$\text{this} = \text{o}_\text{380}$}} \\
+                \ \ \ \ \ \ \text{\btHL<3>{$\text{a}_\text{381}.\text{length} = \text{1}$}} \\
+                \ \ \ \ \ \ \text{\btHL<3>{$\text{a}_\text{381}\text{[0]} = \text{null}$}} \\
+                \ \ \ \ \ \ \text{\btHL<4>{$\text{this}.\text{facts} = \text{a}_\text{381}$}} \\
+                \ \ \ \text{\large\color{darkblue}\bfseries)} \\
+                \ \ \ \text{\btHL<5>{$\text{cfg[0]} = \text{o}_\text{380}$}} \\
+                \ \ \ \text{\btHL<6>{$\text{cfg[0]}.\text{length} \le \text{0}$}} \\
+                \text{\large\color{darkorange}\bfseries)} \\
+              }}
+              \end{column}
+              \begin{column}{0.4\textwidth}
+                \lstinputlisting[language=Java]{TraceFormula.java}
+              \end{column}
+            \end{columns}
+          \end{center}
+        }
+      \item compute interpolants
+      \item extract predicates
+        \begin{center}
+        \vbox{\tt\footnotesize\bfseries
+          \visible<7->{\color{darkblue}$\text{this}.\text{facts}.\text{length} = \text{1}$} \\
+          \visible<8>{\color{darkorange}$\text{o}_\text{380}.\text{facts}.\text{length} = \text{1}$} \\
+          \visible<8>{\color{darkorange}$\text{cfg[0]}.\text{facts}.\text{length} = \text{1}$} \\
+        }
+        \end{center}
+    \end{itemize}
   \end{frame}
 
   \begin{frame}{{P\large{}ANDA} Algorithm}
@@ -316,6 +360,18 @@
     }
   \end{frame}
 
+  \begin{frame}{Example Program}
+    \lstinputlisting[basicstyle=\scriptsize\tt,language=Java,linerange={3-19}]{ArrayMin.java}
+    \strut%
+  \end{frame}
+
+  \begin{frame}{Example Program}
+    \lstinputlisting[basicstyle=\scriptsize\tt,language=Java]{ArrayMinStepByStep.java}
+    \strut%
+    \only<1-11>{\hbox to \hsize{\hfill{\scriptsize\color{darkblue}\tt\bfseries{SIZE = 1, array.length = SIZE, \only<2,8->{\bgroup\color{gray}}j = 0\only<2,8->{\egroup}, \only<2-7>{\bgroup\color{gray}}j = 1\only<2-7>{\egroup}}}\hfill}}%
+    \only<12>{\hbox to \hsize{\hfill{\color{darkgreen}\bfseries{Program Safe}}\hfill}}%
+  \end{frame}
+
   \begin{frame}{ATVA'15 Submission - Evaluation}
     \def\fst{\cellcolor{orange}}
     \def\avg{\cellcolor{orange!30}}
@@ -345,18 +401,8 @@
     \end{center}
   \end{frame}
 
-  \begin{frame}{Example Program}
-    \lstinputlisting[basicstyle=\scriptsize\tt,language=Java,linerange={3-19}]{ArrayMin.java}
-    \strut%
-  \end{frame}
-
-  \begin{frame}{Example Program}
-    \lstinputlisting[basicstyle=\scriptsize\tt,language=Java]{ArrayMinStepByStep.java}
-    \strut%
-    \only<1>{\hbox to \hsize{\hfill{\scriptsize\color{darkblue}\tt\bfseries{SIZE = 1, array.length = SIZE, j = 0, j = 1}}\hfill}}%
-    \only<12>{\hbox to \hsize{\hfill{\color{darkgreen}\bfseries{Program Safe}}\hfill}}%
-  \end{frame}
-
   \subtitleframe{{\Huge{}P\huge{}ANDA} \\\vskip0.5em {\small\color{darkgray}\url{https://github.com/d3sformal/panda}} \small\\ {\scriptsize{}based on \color{darkgray}\url{http://babelfish.arc.nasa.gov/trac/jpf}}}
+
+  \subtitleframe{\raisebox{-0.5\height}{\includegraphics[width=8cm]{kunfupanda.jpg}}Questions?}
 
 \end{document}

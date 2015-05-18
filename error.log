@@ -1,13 +1,13 @@
   1: [<clinit>:3]:   ref(object(188)) = 188 and ref(object(189))
-  2: [main:0]:       ssa_1_frame_1_args = array(187)
-  3: [main:4]:       alength(arrlen, array(356)) = 5
-  4: [main:4]:       ref(array(356)) = 356
-  5: [main:5]:       ssa_1_frame_1_cfg = array(356)
-  6: [main:8]:       alength(arrlen, array(357)) = 1
-  7: [main:8]:       ref(array(357)) = 357
-  8: [main:9]:       ssa_1_frame_1_succ = array(357)
-  9: [main:13]:      ssa_1_arr = awrite(ssa_0_arr, ssa_1_frame_1
- 10: [main:18]:      ref(object(380)) = 380 and fread(ssa_0_fact
+  2: [@1main:0@]:       ssa_1_frame_1_args = array(187)
+  3: [@1main:4@]:       alength(arrlen, array(356)) = 5
+  4: [@1main:4@]:       ref(array(356)) = 356
+  5: [@1main:5@]:       ssa_1_frame_1_cfg = array(356)
+  6: [@1main:8@]:       alength(arrlen, array(357)) = 1
+  7: [@1main:8@]:       ref(array(357)) = 357
+  8: [@1main:9@]:       ssa_1_frame_1_succ = array(357)
+  9: [@1main:13@]:      ssa_1_arr = awrite(ssa_0_arr, ssa_1_frame_1
+ 10: [@1main:18@]:      ref(object(380)) = 380 and fread(ssa_0_fact
  11: [<init>:0]:     ssa_1_frame_2_this = object(380) and ssa_1_
  12: [<init>:0]:     ssa_1_frame_3_local_0 = ssa_1_frame_2_this
  13: [<init>:1]:     true
@@ -15,20 +15,20 @@
  15: [<init>:8]:     alength(arrlen, array(381)) = 1
  16: [<init>:8]:     ref(array(381)) = 381
  17: [<init>:11]:    ssa_1_facts = fwrite(ssa_0_facts, ssa_1_fra
- 18: [@1unknownInt:0@]: true
- 19: [@1unknownInt:2@]: ssa_1_frame_4_return = ssa_0_frame_4_unknow
+ 18: [unknownInt:0]: true
+ 19: [unknownInt:2]: ssa_1_frame_4_return = ssa_0_frame_4_unknow
  20: [<init>:19]:    ssa_1_frame_2_return_pc9 = ssa_1_frame_4_re
  21: [<init>:20]:    ssa_2_arr = awrite(ssa_1_arr, fread(ssa_1_f
  22: [<init>:25]:    ssa_1_successors = fwrite(ssa_0_successors,
  23: [<init>:26]:    true
- 24: [main:23]:      true
- 25: [main:24]:      ssa_3_arr = awrite(ssa_2_arr, ssa_1_frame_1
- 26: [main:27]:      alength(arrlen, array(385)) = 2
- 27: [main:27]:      ref(array(385)) = 385
- 28: [main:28]:      ssa_2_frame_1_succ = array(385)
- 29: [main:32]:      ssa_4_arr = awrite(ssa_3_arr, ssa_2_frame_1
- 30: [main:36]:      ssa_5_arr = awrite(ssa_4_arr, ssa_2_frame_1
- 31: [main:41]:      ref(object(386)) = 386 and fread(ssa_1_fact
+ 24: [@1main:23@]:      true
+ 25: [@1main:24@]:      ssa_3_arr = awrite(ssa_2_arr, ssa_1_frame_1
+ 26: [@1main:27@]:      alength(arrlen, array(385)) = 2
+ 27: [@1main:27@]:      ref(array(385)) = 385
+ 28: [@1main:28@]:      ssa_2_frame_1_succ = array(385)
+ 29: [@1main:32@]:      ssa_4_arr = awrite(ssa_3_arr, ssa_2_frame_1
+ 30: [@1main:36@]:      ssa_5_arr = awrite(ssa_4_arr, ssa_2_frame_1
+ 31: [@1main:41@]:      ref(object(386)) = 386 and fread(ssa_1_fact
  32: [<init>:0]:     ssa_1_frame_5_this = object(386) and ssa_1_
  33: [<init>:0]:     ssa_1_frame_6_local_0 = ssa_1_frame_5_this
  34: [<init>:1]:     true
