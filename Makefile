@@ -16,7 +16,7 @@ slides.pdf: %.pdf: %.latex %.mp beamerthemeD3S.sty algorithm.tex ArrayMin.java A
 present: all
 	@dspdfviewer -a no -f slides.pdf
 
-check: ArrayMin.jpf ArrayMinEnv.class
+check: ArrayMin.jpf ArrayMinEnv.class ArrayMin.class
 	@cd $(PANDA) && bin/run.sh +classpath=$(PRESENTATION) +sourcepath=$(PRESENTATION) $(PRESENTATION)/$<
 
 
