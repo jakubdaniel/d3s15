@@ -271,27 +271,27 @@
   \begin{frame}{Nested Interpolants}
     {}
     \begin{itemize}
-      \item encode trace formula
-        {\tt\scriptsize
+      \item encode trace formula \\
+        \vskip1ex
+        \parbox{\textwidth}{\tt\scriptsize
           \begin{center}
             \begin{columns}
-              \begin{column}{0.4\textwidth}
-              \vskip1ex
+              \begin{column}{0.375\textwidth}
               \hbox{\vbox{
-                \text{\large\color{darkorange}\bfseries(} \\
-                \ \ \ \text{\btHL<2>{$\text{o}_\text{380}.\text{facts} = \text{null}$}} \\
-                \ \ \ \text{\large\color{darkblue}\bfseries(} \\
-                \ \ \ \ \ \ \text{\btHL<2>{$\text{this} = \text{o}_\text{380}$}} \\
-                \ \ \ \ \ \ \text{\btHL<3>{$\text{a}_\text{381}.\text{length} = \text{1}$}} \\
-                \ \ \ \ \ \ \text{\btHL<3>{$\text{a}_\text{381}\text{[0]} = \text{null}$}} \\
-                \ \ \ \ \ \ \text{\btHL<4>{$\text{this}.\text{facts} = \text{a}_\text{381}$}} \\
-                \ \ \ \text{\large\color{darkblue}\bfseries)} \\
-                \ \ \ \text{\btHL<5>{$\text{cfg[0]} = \text{o}_\text{380}$}} \\
-                \ \ \ \text{\btHL<6>{$\text{cfg[0]}.\text{length} \le \text{0}$}} \\
-                \text{\large\color{darkorange}\bfseries)} \\
+                \text{\large\color{darkorange}\bfseries(}\\
+                \ \ \ \text{\btHL<2>{$\text{o}_\text{1}.\text{facts} = \text{null}$}}\\
+                \ \ \ \text{\large\color{darkblue}\bfseries(}\\
+                \ \ \ \ \ \ \text{\btHL<2>{$\text{this} = \text{o}_\text{1}$}}\\
+                \ \ \ \ \ \ \text{\btHL<3>{$\text{a}_\text{2}.\text{length} = \text{1}$}}\\
+                \ \ \ \ \ \ \text{\btHL<3>{$\text{a}_\text{2}\text{[0]} = \text{0}$}}\\
+                \ \ \ \ \ \ \text{\btHL<4>{$\text{this}.\text{facts} = \text{a}_\text{2}$}}\\
+                \ \ \ \text{\large\color{darkblue}\bfseries)}\\
+                \ \ \ \text{\btHL<5>{$\text{cfg[0]} = \text{o}_\text{1}$}}\\
+                \ \ \ \text{\btHL<6>{$\text{cfg[0]}.\text{facts}.\text{length} \le \text{0}$}}\\
+                \text{\large\color{darkorange}\bfseries)}
               }}
               \end{column}
-              \begin{column}{0.4\textwidth}
+              \begin{column}{0.55\textwidth}
                 \lstinputlisting[language=Java]{TraceFormula.java}
               \end{column}
             \end{columns}
@@ -302,7 +302,7 @@
         \begin{center}
         \vbox{\tt\footnotesize\bfseries
           \visible<7->{\color{darkblue}$\text{this}.\text{facts}.\text{length} = \text{1}$} \\
-          \visible<8>{\color{darkorange}$\text{o}_\text{380}.\text{facts}.\text{length} = \text{1}$} \\
+          \visible<8>{\color{darkorange}$\text{o}_\text{1}.\text{facts}.\text{length} = \text{1}$} \\
           \visible<8>{\color{darkorange}$\text{cfg[0]}.\text{facts}.\text{length} = \text{1}$} \\
         }
         \end{center}
