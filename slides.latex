@@ -417,6 +417,6 @@
 
   \subtitleframe{{\Huge{}P\huge{}ANDA} \\\vskip0.5em {\small\color{darkgray}\url{https://github.com/d3sformal/panda}} \small\\ {\scriptsize{}based on \color{darkgray}\url{http://babelfish.arc.nasa.gov/trac/jpf}}}
 
-  \subtitleframe{\raisebox{-0.5\height}{\includegraphics[width=8cm]{kunfupanda.jpg}}Questions?}
+  %\subtitleframe{\raisebox{-0.5\height}{\includegraphics[width=8cm]{kunfupanda.jpg}}Questions?}
 
 \end{document}
